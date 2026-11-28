@@ -3,35 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta id="appleAppTitleMeta" name="apple-mobile-web-app-title" content="Könyvtára" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
   <meta id="appNameMeta" name="application-name" content="Könyvtára" />
-  <meta name="robots" content="noindex, nofollow" />
-  <meta name="theme-color" content="#0B0B0D" />
-  <title>Könyvtára</title>
-  <link rel="icon" type="image/png" href="icon-512.png" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link id="appManifestLink" rel="manifest" href="" />
   <link rel="apple-touch-icon" href="icon-512.png" />
-  <link id="appManifestLink" rel="manifest" href="manifest.json" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <title>Könyvtára</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
   <style>
     :root {
       --bg-primary: #0B0B0D;
-      --bg-card: #151519;
-      --bg-elevated: #1E1E24;
+      --bg-card: #141418;
+      --bg-elevated: #1D1D24;
       --text-main: #F4F2ED;
       --text-muted: #9898A2;
-      --border: #27272F;
+      --border: rgba(255, 255, 255, 0.08);
       --accent: #B81D38;
-      --accent-hover: #D42443;
-      --accent-soft: rgba(184, 29, 56, 0.16);
+      --accent-hover: #D42442;
+      --accent-soft: rgba(184, 29, 56, 0.17);
       --accent-glow: rgba(184, 29, 56, 0.35);
-      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
     }
 
@@ -39,127 +36,104 @@
       --bg-primary: #0A0D10;
       --bg-card: #12171D;
       --bg-elevated: #1A222B;
-      --text-main: #EBF1F5;
-      --text-muted: #8B9BB0;
-      --border: #232E3B;
+      --text-main: #F1F5F9;
+      --text-muted: #94A3B8;
       --accent: #38BDF8;
       --accent-hover: #7DD3FC;
-      --accent-soft: rgba(56, 189, 248, 0.15);
-      --accent-glow: rgba(56, 189, 248, 0.3);
+      --accent-soft: rgba(56, 189, 248, 0.16);
+      --accent-glow: rgba(56, 189, 248, 0.35);
+    }
+
+    [data-theme="emerald"] {
+      --bg-primary: #090E0C;
+      --bg-card: #111A16;
+      --bg-elevated: #182620;
+      --text-main: #ECFDF5;
+      --text-muted: #86EFAC;
+      --accent: #10B981;
+      --accent-hover: #34D399;
+      --accent-soft: rgba(16, 185, 129, 0.16);
+      --accent-glow: rgba(16, 185, 129, 0.35);
+    }
+
+    [data-theme="amber"] {
+      --bg-primary: #0E0C08;
+      --bg-card: #191610;
+      --bg-elevated: #221E15;
+      --text-main: #FEFCE8;
+      --text-muted: #D4C59E;
+      --accent: #EAB308;
+      --accent-hover: #FACC15;
+      --accent-soft: rgba(234, 179, 8, 0.16);
+      --accent-glow: rgba(234, 179, 8, 0.35);
+    }
+
+    [data-theme="violet"] {
+      --bg-primary: #0C0911;
+      --bg-card: #161120;
+      --bg-elevated: #20192C;
+      --text-main: #F5F3FF;
+      --text-muted: #C4B5FD;
+      --accent: #A855F7;
+      --accent-hover: #C084FC;
+      --accent-soft: rgba(168, 85, 247, 0.16);
+      --accent-glow: rgba(168, 85, 247, 0.35);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
-    body {
-      background-color: #050506;
+    html, body {
+      background-color: var(--bg-primary);
       color: var(--text-main);
       font-family: var(--font-sans);
       min-height: 100vh;
-      display: flex;
-      justify-content: center;
       overflow-x: hidden;
     }
 
-    .app-container {
-      width: 100%;
-      max-width: 480px;
-      min-height: 100vh;
-      background-color: var(--bg-primary);
-      position: relative;
-      padding-bottom: 92px;
-      box-shadow: 0 0 60px rgba(0, 0, 0, 0.85);
-      border-left: 1px solid var(--border);
-      border-right: 1px solid var(--border);
-      transition: background-color 0.3s ease;
-    }
-
-    .app-header {
-      padding: 20px 20px 14px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      background: rgba(11, 11, 13, 0.88);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    [data-theme="nordic"] .app-header {
-      background: rgba(10, 13, 16, 0.88);
-    }
-
-    .brand-title {
-      font-family: var(--font-mono);
-      font-size: 13px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-main);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .brand-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background-color: var(--accent);
-      box-shadow: 0 0 10px var(--accent);
-      flex-shrink: 0;
-    }
-
-    .user-handle-pill {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--accent);
-      background: var(--accent-soft);
-      border: 1px solid var(--border);
-      padding: 4px 10px;
-      border-radius: 99px;
+    html.modal-open,
+    body.modal-open {
+      overflow: hidden !important;
+      touch-action: none;
     }
 
     .auth-screen {
       position: fixed;
       inset: 0;
+      background: radial-gradient(circle at top, var(--accent-soft), var(--bg-primary) 70%);
       z-index: 80;
-      background: #050506;
-      display: flex;
-      justify-content: center;
+      display: none;
       align-items: center;
+      justify-content: center;
       padding: 20px;
+      overflow-y: auto;
     }
 
     .auth-card {
       width: 100%;
-      max-width: 420px;
+      max-width: 400px;
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-top: 3px solid var(--accent);
       border-radius: 18px;
-      padding: 26px 24px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.85);
+      padding: 24px 20px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75);
     }
 
     .auth-switch-tabs {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      margin-bottom: 18px;
-      background: var(--bg-primary);
+      gap: 6px;
+      background: var(--bg-elevated);
       padding: 4px;
       border-radius: 10px;
-      border: 1px solid var(--border);
+      margin-bottom: 18px;
     }
 
     .auth-tab-btn {
       background: transparent;
       border: none;
       color: var(--text-muted);
-      padding: 9px;
-      border-radius: 7px;
+      padding: 8px;
+      border-radius: 8px;
       font-size: 12px;
       font-weight: 600;
       cursor: pointer;
@@ -170,52 +144,101 @@
       color: #fff;
     }
 
-    .view-section {
-      display: none;
-      padding: 18px 20px;
-      animation: fadeIn 0.25s ease;
+    .app-container {
+      width: 100%;
+      max-width: 480px;
+      min-height: 100vh;
+      margin: 0 auto;
+      padding-bottom: 92px;
+      position: relative;
     }
-    .view-section.active { display: block; }
+
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(11, 11, 13, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    [data-theme="nordic"] .app-header { background: rgba(10, 13, 16, 0.88); }
+    [data-theme="emerald"] .app-header { background: rgba(9, 14, 12, 0.88); }
+    [data-theme="amber"] .app-header { background: rgba(14, 12, 8, 0.88); }
+    [data-theme="violet"] .app-header { background: rgba(12, 9, 17, 0.88); }
+
+    .brand-title {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .brand-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px var(--accent-glow);
+      flex-shrink: 0;
+    }
+
+    .user-handle-pill {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 4px 10px;
+      border-radius: 99px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .view-section { display: none; padding: 16px 18px; }
+    .view-section.active { display: block; animation: fadeIn 0.22s ease; }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
+      from { opacity: 0; transform: translateY(4px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     .challenge-card {
-      background: var(--bg-card);
+      background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-elevated) 100%);
       border: 1px solid var(--border);
       border-radius: 14px;
-      padding: 16px;
-      margin-bottom: 16px;
+      padding: 14px 16px;
+      margin-bottom: 14px;
     }
 
     .challenge-header {
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 10px;
+      align-items: center;
+      margin-bottom: 8px;
     }
 
-    .challenge-title {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--text-muted);
-    }
-
-    .challenge-count {
-      font-family: var(--font-mono);
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--accent);
-    }
+    .challenge-title { font-weight: 600; font-size: 13px; }
+    .challenge-count { font-family: var(--font-mono); font-size: 12px; color: var(--accent); }
 
     .progress-track {
       width: 100%;
-      height: 7px;
-      background: var(--bg-elevated);
+      height: 6px;
+      background: rgba(255, 255, 255, 0.07);
       border-radius: 99px;
       overflow: hidden;
     }
@@ -439,7 +462,7 @@
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 14px;
-      padding: 15px;
+      padding: 14px 15px;
       margin-bottom: 12px;
     }
 
@@ -447,8 +470,47 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .friend-card-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+
+    .friend-header-line {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      min-width: 0;
+    }
+
+    .friend-identity {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .friend-name-row {
+      display: flex;
+      align-items: baseline;
       gap: 8px;
       flex-wrap: wrap;
+    }
+
+    .friend-actions-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+    }
+
+    .friend-actions-row .mini-btn {
+      width: 100%;
+      text-align: center;
+      padding: 8px 6px;
     }
 
     .avatar-wrap {
@@ -507,10 +569,10 @@
     .status-line {
       font-size: 11px;
       color: var(--text-muted);
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 5px;
-      margin-top: 2px;
+      line-height: 1.3;
     }
 
     .status-line.online {
@@ -575,6 +637,11 @@
       font-size: 11px;
       font-weight: 600;
       cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+    }
+
+    .mini-btn:hover {
+      border-color: var(--accent);
     }
 
     .mini-btn.accent {
@@ -738,6 +805,11 @@
       border-radius: 12px;
       padding: 14px;
       margin-top: 10px;
+      display: none;
+    }
+
+    .rgb-box.visible {
+      display: block;
     }
 
     .rgb-row {
@@ -994,7 +1066,7 @@
 
     .theme-selector {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: repeat(3, 1fr);
       gap: 8px;
     }
 
@@ -1002,20 +1074,23 @@
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 12px 10px;
+      padding: 11px 10px;
       cursor: pointer;
       text-align: left;
+      transition: border-color 0.18s, background 0.18s;
     }
     .theme-option.active {
       border-color: var(--accent);
       background: var(--accent-soft);
+      box-shadow: inset 0 0 0 1px var(--accent);
     }
 
     .theme-swatch {
       width: 22px;
       height: 22px;
       border-radius: 50%;
-      margin-bottom: 8px;
+      margin-bottom: 7px;
+      border: 1px solid rgba(255,255,255,0.14);
     }
 
     .bottom-nav {
@@ -1034,9 +1109,10 @@
       z-index: 30;
     }
 
-    [data-theme="nordic"] .bottom-nav {
-      background: rgba(10, 13, 16, 0.94);
-    }
+    [data-theme="nordic"] .bottom-nav { background: rgba(10, 13, 16, 0.94); }
+    [data-theme="emerald"] .bottom-nav { background: rgba(9, 14, 12, 0.94); }
+    [data-theme="amber"] .bottom-nav { background: rgba(14, 12, 8, 0.94); }
+    [data-theme="violet"] .bottom-nav { background: rgba(12, 9, 17, 0.94); }
 
     .nav-item {
       background: none;
@@ -1091,6 +1167,7 @@
       display: none;
       justify-content: center;
       align-items: flex-end;
+      overscroll-behavior: contain;
     }
     .modal-overlay.open { display: flex; }
 
@@ -1103,6 +1180,8 @@
       border-radius: 20px 20px 0 0;
       padding: 20px;
       overflow-y: auto;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
       animation: slideUp 0.25s ease;
     }
 
@@ -1433,7 +1512,7 @@
   <!-- 4. PROFIL -->
   <section id="view-profile" class="view-section">
     <h1 class="section-heading">Profilom</h1>
-    <p class="section-sub">Fiók adatok, egyedi karakter avatar, barátok és RGB megjelenés.</p>
+    <p class="section-sub">Fiók adatok, egyedi karakter avatar, barátok és megjelenés.</p>
 
     <div class="social-card" style="margin-bottom: 16px;">
       <div style="display:flex; justify-content:space-between; align-items:center; gap:10px;">
@@ -1474,7 +1553,7 @@
     </div>
 
     <div class="form-group">
-      <label class="form-label">Téma és egyedi RGB szín</label>
+      <label class="form-label">Alap témák és egyedi RGB</label>
       <div class="theme-selector">
         <div class="theme-option active" id="themeCrimson" onclick="setTheme('crimson')">
           <div class="theme-swatch" style="background: #B81D38;"></div>
@@ -1485,6 +1564,21 @@
           <div class="theme-swatch" style="background: #38BDF8;"></div>
           <div style="font-weight: 600; font-size: 12px; margin-bottom: 2px;">Jégkék</div>
           <div style="font-size: 10px; color: var(--text-muted);">Északi</div>
+        </div>
+        <div class="theme-option" id="themeEmerald" onclick="setTheme('emerald')">
+          <div class="theme-swatch" style="background: #10B981;"></div>
+          <div style="font-weight: 600; font-size: 12px; margin-bottom: 2px;">Smaragd</div>
+          <div style="font-size: 10px; color: var(--text-muted);">Erdei zöld</div>
+        </div>
+        <div class="theme-option" id="themeAmber" onclick="setTheme('amber')">
+          <div class="theme-swatch" style="background: #EAB308;"></div>
+          <div style="font-weight: 600; font-size: 12px; margin-bottom: 2px;">Borostyán</div>
+          <div style="font-size: 10px; color: var(--text-muted);">Meleg sárga</div>
+        </div>
+        <div class="theme-option" id="themeViolet" onclick="setTheme('violet')">
+          <div class="theme-swatch" style="background: #A855F7;"></div>
+          <div style="font-weight: 600; font-size: 12px; margin-bottom: 2px;">Ibolya</div>
+          <div style="font-size: 10px; color: var(--text-muted);">Esti lila</div>
         </div>
         <div class="theme-option" id="themeCustom" onclick="selectCustomRgbMode()">
           <div class="theme-swatch" id="customRgbSwatch" style="background: rgb(184, 29, 56);"></div>
@@ -1547,7 +1641,7 @@
   </nav>
 </div>
 
-<!-- MODAL: SNAPCHAT-STÍLUSÚ AVATAR SZERKESZTŐ -->
+<!-- MODAL: AVATAR SZERKESZTŐ -->
 <div id="avatarModal" class="modal-overlay">
   <div class="modal-sheet" id="avatarModalContent"></div>
 </div>
@@ -1639,6 +1733,14 @@
     "Megsiratott", "Megható", "Parás", "Elgondolkodtató"
   ];
 
+  const PRESET_THEMES = {
+    crimson: { id: "crimson", domTheme: "crimson", elId: "themeCrimson", rgb: { r: 184, g: 29, b: 56 }, canvasBg1: "#0B0B0D", canvasBg2: "#1E1619" },
+    nordic:  { id: "nordic",  domTheme: "nordic",  elId: "themeNordic",  rgb: { r: 56,  g: 189, b: 248 }, canvasBg1: "#0A0D10", canvasBg2: "#1A222B" },
+    emerald: { id: "emerald", domTheme: "emerald", elId: "themeEmerald", rgb: { r: 16,  g: 185, b: 129 }, canvasBg1: "#090E0C", canvasBg2: "#182620" },
+    amber:   { id: "amber",   domTheme: "amber",   elId: "themeAmber",   rgb: { r: 234, g: 179, b: 8 },   canvasBg1: "#0E0C08", canvasBg2: "#221E15" },
+    violet:  { id: "violet",  domTheme: "violet",  elId: "themeViolet",  rgb: { r: 168, g: 85,  b: 247 }, canvasBg1: "#0C0911", canvasBg2: "#20192C" }
+  };
+
   const SPINE_COLORS = ["#38BDF8", "#2DD4BF", "#FACC15", "#FB7185", "#A78BFA", "#4ADE80"];
   const MONTHS_HU = ["Jan", "Feb", "Már", "Ápr", "Máj", "Jún", "Júl", "Aug", "Szep", "Okt", "Nov", "Dec"];
   const CURRENT_YEAR = new Date().getFullYear();
@@ -1651,6 +1753,7 @@
 
   const AVATAR_HAIR_STYLES = [
     { id: "short", label: "Rövid" },
+    { id: "bangs", label: "Frufru" },
     { id: "long", label: "Hosszú" },
     { id: "curly", label: "Göndör" },
     { id: "bun", label: "Konty" },
@@ -1712,6 +1815,25 @@
   let presenceInterval = null;
   let lastPresencePushAt = 0;
   let dynamicManifestUrl = null;
+
+  function syncModalBodyLock() {
+    const hasOpenModal = Boolean(document.querySelector(".modal-overlay.open"));
+    document.documentElement.classList.toggle("modal-open", hasOpenModal);
+    document.body.classList.toggle("modal-open", hasOpenModal);
+  }
+
+  function openModal(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.add("open");
+    syncModalBodyLock();
+  }
+
+  function closeModal(id) {
+    const el = document.getElementById(id);
+    if (el) el.classList.remove("open");
+    syncModalBodyLock();
+  }
 
   function escapeHtml(str) {
     return String(str || "")
@@ -1820,6 +1942,8 @@
     let backHair = "";
     if (c.hairStyle === "long") {
       backHair = `<rect x="27" y="34" width="46" height="44" rx="20" fill="${c.hairColor}" />`;
+    } else if (c.hairStyle === "bangs") {
+      backHair = `<rect x="28" y="34" width="44" height="36" rx="18" fill="${c.hairColor}" />`;
     } else if (c.hairStyle === "curly") {
       backHair = `
         <circle cx="30" cy="40" r="10" fill="${c.hairColor}" />
@@ -1834,6 +1958,10 @@
     let frontHair = "";
     if (c.hairStyle === "short") {
       frontHair = `<path d="M29 44 C29 24, 71 24, 71 44 C66 34, 57 32, 50 35 C42 32, 34 34, 29 44 Z" fill="${c.hairColor}" />`;
+    } else if (c.hairStyle === "bangs") {
+      frontHair = `
+        <path d="M28 45 C28 22, 72 22, 72 45 L67 45 L64 39 L60 44 L55 39 L50 44 L45 39 L40 44 L36 39 L33 45 Z" fill="${c.hairColor}" />
+      `;
     } else if (c.hairStyle === "long") {
       frontHair = `<path d="M28 45 C28 23, 72 23, 72 45 C66 33, 55 32, 50 36 C43 32, 34 33, 28 45 Z" fill="${c.hairColor}" />`;
     } else if (c.hairStyle === "curly") {
@@ -1960,7 +2088,7 @@
     const online = isUserOnline(lastSeenIso);
     const combined = [label, suffixText].filter(Boolean).join(" • ");
     if (!combined) return "";
-    return `<div class="status-line ${online ? "online" : ""}">${escapeHtml(combined)}</div>`;
+    return `<span class="status-line ${online ? "online" : ""}">${escapeHtml(combined)}</span>`;
   }
 
   function renderAvatarHtml({ username = "?", avatarCfg = null, lastSeen = null, showOnlineDot = true, sizeClass = "" }) {
@@ -1980,7 +2108,7 @@
   function openAvatarModal() {
     draftAvatarCfg = { ...parseAvatarConfig(userProfile.avatar_cfg, userProfile.username) };
     renderAvatarModalContent();
-    document.getElementById("avatarModal").classList.add("open");
+    openModal("avatarModal");
   }
 
   function updateDraftAvatar(key, value) {
@@ -2147,10 +2275,13 @@
         };
       }
     }
-    if (rawTheme === "nordic") {
-      return { mode: "nordic", rgb: { r: 56, g: 189, b: 248 } };
+    if (PRESET_THEMES[rawTheme]) {
+      return {
+        mode: rawTheme,
+        rgb: { ...PRESET_THEMES[rawTheme].rgb }
+      };
     }
-    return { mode: "crimson", rgb: { r: 184, g: 29, b: 56 } };
+    return { mode: "crimson", rgb: { ...PRESET_THEMES.crimson.rgb } };
   }
 
   function clearCustomAccentStyles() {
@@ -2162,16 +2293,18 @@
 
   function applyTheme(themeVal, customRgb = null) {
     const parsed = parseThemeConfig(themeVal);
-    const rgb = customRgb
-      ? { r: clampRgb(customRgb.r), g: clampRgb(customRgb.g), b: clampRgb(customRgb.b) }
-      : parsed.rgb;
-
     const isRgb = parsed.mode === "rgb" || Boolean(customRgb);
     const activeMode = isRgb ? "rgb" : parsed.mode;
+    const rgb = isRgb
+      ? (customRgb
+          ? { r: clampRgb(customRgb.r), g: clampRgb(customRgb.g), b: clampRgb(customRgb.b) }
+          : parsed.rgb)
+      : { ...PRESET_THEMES[activeMode].rgb };
 
-    document.documentElement.setAttribute("data-theme", activeMode === "nordic" ? "nordic" : "crimson");
+    const domTheme = isRgb ? "crimson" : PRESET_THEMES[activeMode].domTheme;
+    document.documentElement.setAttribute("data-theme", domTheme);
 
-    if (activeMode === "rgb") {
+    if (isRgb) {
       const { r, g, b } = rgb;
       const hoverR = clampRgb(r + 22);
       const hoverG = clampRgb(g + 22);
@@ -2185,12 +2318,17 @@
       clearCustomAccentStyles();
     }
 
-    const cBtn = document.getElementById("themeCrimson");
-    const nBtn = document.getElementById("themeNordic");
-    const xBtn = document.getElementById("themeCustom");
-    if (cBtn) cBtn.classList.toggle("active", activeMode === "crimson");
-    if (nBtn) nBtn.classList.toggle("active", activeMode === "nordic");
-    if (xBtn) xBtn.classList.toggle("active", activeMode === "rgb");
+    Object.values(PRESET_THEMES).forEach(preset => {
+      const btn = document.getElementById(preset.elId);
+      if (btn) btn.classList.toggle("active", activeMode === preset.id);
+    });
+    const customBtn = document.getElementById("themeCustom");
+    if (customBtn) customBtn.classList.toggle("active", activeMode === "rgb");
+
+    const rgbBox = document.getElementById("rgbPickerBox");
+    if (rgbBox) {
+      rgbBox.classList.toggle("visible", activeMode === "rgb");
+    }
 
     const rInput = document.getElementById("rgbR");
     const gInput = document.getElementById("rgbG");
@@ -2257,15 +2395,12 @@
   }
 
   async function setTheme(theme) {
-    userProfile.theme = theme;
-    if (theme === "nordic") {
-      userProfile.rgb = { r: 56, g: 189, b: 248 };
-    } else if (theme === "crimson") {
-      userProfile.rgb = { r: 184, g: 29, b: 56 };
-    }
-    applyTheme(theme, userProfile.rgb);
+    const preset = PRESET_THEMES[theme] || PRESET_THEMES.crimson;
+    userProfile.theme = preset.id;
+    userProfile.rgb = { ...preset.rgb };
+    applyTheme(preset.id);
     if (sbClient && currentUser) {
-      await sbClient.from("profiles").update({ theme }).eq("id", currentUser.id);
+      await sbClient.from("profiles").update({ theme: preset.id }).eq("id", currentUser.id);
     }
     showToast("Téma frissítve!");
   }
@@ -2404,7 +2539,7 @@
     };
 
     applyBranding();
-    applyTheme(userProfile.theme, userProfile.rgb);
+    applyTheme(userProfile.theme, parsedTheme.mode === "rgb" ? parsedTheme.rgb : null);
     renderProfile();
     startPresenceLoop();
 
@@ -2487,7 +2622,7 @@
   async function openFollowModal(tab = "friends") {
     await loadSocialFromSupabase();
     renderFollowModalContent(tab);
-    document.getElementById("followModal").classList.add("open");
+    openModal("followModal");
   }
 
   function renderFollowModalContent(tab = "friends") {
@@ -2499,16 +2634,19 @@
       itemsHtml = friendsList.length > 0
         ? friendsList.map(person => `
             <div class="social-card" style="margin-bottom:8px;">
-              <div class="friend-row">
-                <div style="display:flex; align-items:center; gap:10px;">
+              <div class="friend-card-layout">
+                <div class="friend-header-line">
                   ${renderAvatarHtml({ username: person.username, avatarCfg: person.avatar_cfg, lastSeen: person.last_seen })}
-                  <div>
-                    <div style="font-weight:600; font-size:14px;">@${escapeHtml(person.username)}</div>
-                    ${renderStatusLineHtml(person.last_seen)}
+                  <div class="friend-identity">
+                    <div class="friend-name-row">
+                      <span style="font-weight:600; font-size:14px;">@${escapeHtml(person.username)}</span>
+                      ${renderStatusLineHtml(person.last_seen)}
+                    </div>
                   </div>
                 </div>
-                <div style="display:flex; gap:6px;">
+                <div class="friend-actions-row">
                   <button type="button" class="mini-btn" onclick="closeModal('followModal'); switchView('friends', document.querySelectorAll('.nav-item')[2]); openChatWith('${person.id}')">Üzenet</button>
+                  <button type="button" class="mini-btn" onclick="closeModal('followModal'); switchView('friends', document.querySelectorAll('.nav-item')[2]); openRecFor('${person.id}')">Ajánlás</button>
                   <button type="button" class="mini-btn danger" onclick="removeFriendFromModal('${person.id}', '${escapeHtml(person.username)}', '${tab}')">Törlés</button>
                 </div>
               </div>
@@ -2519,11 +2657,13 @@
       const incomingHtml = incomingRequests.map(req => `
         <div class="social-card" style="margin-bottom:8px;">
           <div class="friend-row">
-            <div style="display:flex; align-items:center; gap:10px;">
+            <div class="friend-header-line" style="flex:1;">
               ${renderAvatarHtml({ username: req.username, avatarCfg: req.avatar_cfg, lastSeen: req.last_seen })}
-              <div>
-                <div style="font-weight:600; font-size:14px;">@${escapeHtml(req.username)}</div>
-                ${renderStatusLineHtml(req.last_seen)}
+              <div class="friend-identity">
+                <div class="friend-name-row">
+                  <span style="font-weight:600; font-size:14px;">@${escapeHtml(req.username)}</span>
+                  ${renderStatusLineHtml(req.last_seen)}
+                </div>
               </div>
             </div>
             <div style="display:flex; gap:6px;">
@@ -2537,11 +2677,13 @@
       const outgoingHtml = outgoingRequests.map(req => `
         <div class="social-card" style="margin-bottom:8px;">
           <div class="friend-row">
-            <div style="display:flex; align-items:center; gap:10px;">
+            <div class="friend-header-line" style="flex:1;">
               ${renderAvatarHtml({ username: req.username, avatarCfg: req.avatar_cfg, lastSeen: req.last_seen })}
-              <div>
-                <div style="font-weight:600; font-size:14px;">@${escapeHtml(req.username)}</div>
-                ${renderStatusLineHtml(req.last_seen, "Visszajelölésre vár")}
+              <div class="friend-identity">
+                <div class="friend-name-row">
+                  <span style="font-weight:600; font-size:14px;">@${escapeHtml(req.username)}</span>
+                  ${renderStatusLineHtml(req.last_seen, "Visszajelölésre vár")}
+                </div>
               </div>
             </div>
             <button type="button" class="mini-btn danger" onclick="cancelOutgoingFromModal('${req.friendshipId}', '${escapeHtml(req.username)}')">Visszavonás</button>
@@ -2846,7 +2988,7 @@
       ${listHtml}
     `;
 
-    document.getElementById("shelfPickerModal").classList.add("open");
+    openModal("shelfPickerModal");
   }
 
   function renderShelf() {
@@ -3029,11 +3171,13 @@
       reqBox.innerHTML = `<div class="form-label" style="margin-bottom: 8px;">Bejövő barátkérelmek</div>` + incomingRequests.map(req => `
         <div class="social-card">
           <div class="friend-row">
-            <div style="display:flex; align-items:center; gap:10px;">
+            <div class="friend-header-line" style="flex:1;">
               ${renderAvatarHtml({ username: req.username, avatarCfg: req.avatar_cfg, lastSeen: req.last_seen })}
-              <div>
-                <div style="font-weight:600; font-size:14px;">@${escapeHtml(req.username)}</div>
-                ${renderStatusLineHtml(req.last_seen)}
+              <div class="friend-identity">
+                <div class="friend-name-row">
+                  <span style="font-weight:600; font-size:14px;">@${escapeHtml(req.username)}</span>
+                  ${renderStatusLineHtml(req.last_seen)}
+                </div>
               </div>
             </div>
             <div style="display:flex; gap:6px;">
@@ -3053,15 +3197,17 @@
     } else {
       listEl.innerHTML = friendsList.map(f => `
         <div class="social-card">
-          <div class="friend-row">
-            <div style="display:flex; align-items:center; gap:10px;">
+          <div class="friend-card-layout">
+            <div class="friend-header-line">
               ${renderAvatarHtml({ username: f.username, avatarCfg: f.avatar_cfg, lastSeen: f.last_seen })}
-              <div>
-                <div style="font-weight:600; font-size:14px;">@${escapeHtml(f.username)}</div>
-                ${renderStatusLineHtml(f.last_seen)}
+              <div class="friend-identity">
+                <div class="friend-name-row">
+                  <span style="font-weight:600; font-size:14px;">@${escapeHtml(f.username)}</span>
+                  ${renderStatusLineHtml(f.last_seen)}
+                </div>
               </div>
             </div>
-            <div style="display:flex; gap:6px; flex-wrap:wrap;">
+            <div class="friend-actions-row">
               <button class="mini-btn" onclick="openChatWith('${f.id}')">Üzenet</button>
               <button class="mini-btn" onclick="openRecFor('${f.id}')">Ajánlás</button>
               <button class="mini-btn danger" onclick="deleteFriend('${f.id}', '${f.username}')">Törlés</button>
@@ -3487,7 +3633,8 @@
     }
 
     updateFriendCounters();
-    applyTheme(userProfile.theme || "crimson", userProfile.rgb);
+    const parsed = parseThemeConfig(userProfile.theme || "crimson");
+    applyTheme(userProfile.theme || "crimson", parsed.mode === "rgb" ? parsed.rgb : null);
   }
 
   async function saveProfile() {
@@ -3630,11 +3777,7 @@
     document.getElementById("newStatus").value = "reading";
     document.getElementById("newCover").value = "";
     document.getElementById("newCoverPreview").textContent = "";
-    document.getElementById("addModal").classList.add("open");
-  }
-
-  function closeModal(id) {
-    document.getElementById(id).classList.remove("open");
+    openModal("addModal");
   }
 
   async function addManualBook() {
@@ -3909,7 +4052,7 @@
       <button class="btn-secondary" style="color: #f85149; border-color: rgba(248,81,73,0.3);" onclick="deleteBook('${book.id}')">Könyv törlése</button>
     `;
 
-    document.getElementById("detailModal").classList.add("open");
+    openModal("detailModal");
   }
 
   function updateLivePagePreview(val, maxPages) {
@@ -4021,14 +4164,14 @@
     const canvas = document.getElementById("shareCanvas");
     const ctx = canvas.getContext("2d");
     const parsed = parseThemeConfig(userProfile.theme);
-    const isNordic = parsed.mode === "nordic";
     const isRgb = parsed.mode === "rgb";
+    const preset = PRESET_THEMES[parsed.mode] || PRESET_THEMES.crimson;
 
-    const bg1 = isNordic ? "#0A0D10" : "#0B0B0D";
-    const bg2 = isNordic ? "#1A222B" : "#1E1619";
+    const bg1 = isRgb ? "#0B0B0D" : preset.canvasBg1;
+    const bg2 = isRgb ? "#1E1619" : preset.canvasBg2;
     const accent = isRgb
       ? `rgb(${userProfile.rgb.r}, ${userProfile.rgb.g}, ${userProfile.rgb.b})`
-      : (isNordic ? "#38BDF8" : "#B81D38");
+      : `rgb(${preset.rgb.r}, ${preset.rgb.g}, ${preset.rgb.b})`;
 
     const grad = ctx.createLinearGradient(0, 0, 1080, 1350);
     grad.addColorStop(0, bg2);
