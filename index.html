@@ -120,7 +120,6 @@
       border-radius: 99px;
     }
 
-    /* AUTH OVERLAY */
     .auth-screen {
       position: fixed;
       inset: 0;
@@ -435,7 +434,6 @@
       margin-bottom: 18px;
     }
 
-    /* BARÁTOK & ÜZENETEK & AJÁNLÁSOK */
     .social-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -488,6 +486,181 @@
     .mini-btn.danger {
       color: #f85149;
       border-color: rgba(248, 81, 73, 0.35);
+    }
+
+    .follow-stats-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .follow-stat-btn {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+      color: var(--text-main);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .follow-stat-btn:hover {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .follow-stat-num {
+      font-family: var(--font-mono);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .follow-stat-lbl {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .page-stepper-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .page-badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent-soft);
+      border: 1px solid var(--accent);
+      color: var(--text-main);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 99px;
+    }
+
+    .page-manual-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .page-manual-input {
+      width: 96px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 8px 10px;
+      border-radius: 9px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 600;
+      text-align: center;
+      outline: none;
+    }
+
+    .page-manual-input:focus {
+      border-color: var(--accent);
+    }
+
+    .page-step-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .step-btn {
+      flex: 1;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 9px 10px;
+      border-radius: 9px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+    }
+
+    .step-btn:hover {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .year-nav-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .year-arrow-btn {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      width: 26px;
+      height: 26px;
+      border-radius: 7px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .year-arrow-btn:hover:not(:disabled) {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .year-arrow-btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    .rgb-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      margin-top: 10px;
+    }
+
+    .rgb-row {
+      display: grid;
+      grid-template-columns: 24px 1fr 42px;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .rgb-row:last-child { margin-bottom: 0; }
+
+    .rgb-channel-label {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .rgb-val {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      text-align: right;
+      color: var(--text-muted);
     }
 
     .chat-box {
@@ -721,15 +894,15 @@
 
     .theme-selector {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
     }
 
     .theme-option {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 14px;
+      padding: 12px 10px;
       cursor: pointer;
       text-align: left;
     }
@@ -978,7 +1151,7 @@
 <div id="toast" class="toast"></div>
 <canvas id="shareCanvas" width="1080" height="1350" style="display:none;"></canvas>
 
-<!-- FELHASZNÁLÓNÉV + E-MAIL + JELSZÓ BELÉPŐ/REGISZTRÁCIÓS KÉPERNYŐ -->
+<!-- BELÉPŐ / REGISZTRÁCIÓS KÉPERNYŐ -->
 <div id="authScreen" class="auth-screen">
   <div class="auth-card">
     <div style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; color: var(--accent); text-transform: uppercase; margin-bottom: 8px;">KÖNYVTÁR // KÖZÖSSÉG</div>
@@ -1032,6 +1205,7 @@
 
     <div class="filter-tabs" id="shelfFilters">
       <button class="filter-tab active" data-filter="reading">Épp olvasom</button>
+      <button class="filter-tab" data-filter="queue">Várólista</button>
       <button class="filter-tab" data-filter="finished">Elolvasva</button>
       <button class="filter-tab" data-filter="tbr">Kívánságlista</button>
       <button class="filter-tab" data-filter="dnf">Félbehagyott</button>
@@ -1067,9 +1241,13 @@
     </div>
 
     <div class="chart-card">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 6px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 6px; gap: 8px;">
         <span class="form-label" style="margin:0;">Havi olvasás (elolvasott könyvek)</span>
-        <span id="statsYearLabel" style="font-family: var(--font-mono); font-size: 11px; color: var(--accent);">2026</span>
+        <div class="year-nav-group">
+          <button type="button" class="year-arrow-btn" id="prevYearBtn" onclick="changeStatsYear(-1)" title="Előző év">◀</button>
+          <span id="statsYearLabel" style="font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--accent); min-width: 42px; text-align:center;">2026</span>
+          <button type="button" class="year-arrow-btn" id="nextYearBtn" onclick="changeStatsYear(1)" title="Következő év">▶</button>
+        </div>
       </div>
       <div class="chart-bars" id="monthlyChart"></div>
     </div>
@@ -1155,7 +1333,7 @@
   <!-- 4. PROFIL -->
   <section id="view-profile" class="view-section">
     <h1 class="section-heading">Profilom</h1>
-    <p class="section-sub">Fiók adatok, olvasási cél és megjelenés.</p>
+    <p class="section-sub">Fiók adatok, barátok, olvasási cél és RGB megjelenés.</p>
 
     <div class="social-card" style="margin-bottom: 16px;">
       <div style="display:flex; justify-content:space-between; align-items:center;">
@@ -1164,6 +1342,17 @@
           <div style="font-weight: 600; font-size: 14px; margin-top: 2px;" id="profEmail">-</div>
         </div>
         <button class="mini-btn" onclick="logoutUser()">Kijelentkezés</button>
+      </div>
+
+      <div class="follow-stats-row">
+        <button type="button" class="follow-stat-btn" onclick="openFollowModal('friends')">
+          <span class="follow-stat-lbl">Barátok</span>
+          <span class="follow-stat-num" id="friendsAcceptedCount">0</span>
+        </button>
+        <button type="button" class="follow-stat-btn" onclick="openFollowModal('pending')">
+          <span class="follow-stat-lbl">Függőben</span>
+          <span class="follow-stat-num" id="friendsPendingCount">0</span>
+        </button>
       </div>
     </div>
 
@@ -1178,17 +1367,47 @@
     </div>
 
     <div class="form-group">
-      <label class="form-label">Téma választása</label>
+      <label class="form-label">Téma és egyedi RGB szín</label>
       <div class="theme-selector">
         <div class="theme-option active" id="themeCrimson" onclick="setTheme('crimson')">
           <div class="theme-swatch" style="background: #B81D38;"></div>
-          <div style="font-weight: 600; font-size: 13px; margin-bottom: 2px;">Éjfekete & Bordó</div>
-          <div style="font-size: 11px; color: var(--text-muted);">Klasszikus thriller</div>
+          <div style="font-weight: 600; font-size: 12px; margin-bottom: 2px;">Bordó</div>
+          <div style="font-size: 10px; color: var(--text-muted);">Alap téma</div>
         </div>
         <div class="theme-option" id="themeNordic" onclick="setTheme('nordic')">
           <div class="theme-swatch" style="background: #38BDF8;"></div>
-          <div style="font-weight: 600; font-size: 13px; margin-bottom: 2px;">Skandináv Éj</div>
-          <div style="font-size: 11px; color: var(--text-muted);">Hideg jégkék</div>
+          <div style="font-weight: 600; font-size: 12px; margin-bottom: 2px;">Jégkék</div>
+          <div style="font-size: 10px; color: var(--text-muted);">Északi</div>
+        </div>
+        <div class="theme-option" id="themeCustom" onclick="selectCustomRgbMode()">
+          <div class="theme-swatch" id="customRgbSwatch" style="background: rgb(184, 29, 56);"></div>
+          <div style="font-weight: 600; font-size: 12px; margin-bottom: 2px;">Egyedi RGB</div>
+          <div style="font-size: 10px; color: var(--text-muted);" id="customRgbHexLabel">#B81D38</div>
+        </div>
+      </div>
+
+      <div class="rgb-box" id="rgbPickerBox">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+          <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);">RGB CSÚSZKÁK</span>
+          <span id="rgbLivePreviewPill" style="font-family: var(--font-mono); font-size: 11px; padding: 3px 9px; border-radius: 99px; background: var(--accent); color: #fff;">rgb(184, 29, 56)</span>
+        </div>
+
+        <div class="rgb-row">
+          <span class="rgb-channel-label" style="color:#ff5c77;">R</span>
+          <input type="range" id="rgbR" min="0" max="255" value="184" style="accent-color:#ff5c77;" oninput="onRgbSliderChange()" onchange="saveCustomRgbTheme()" />
+          <span class="rgb-val" id="rgbRVal">184</span>
+        </div>
+
+        <div class="rgb-row">
+          <span class="rgb-channel-label" style="color:#4ade80;">G</span>
+          <input type="range" id="rgbG" min="0" max="255" value="29" style="accent-color:#4ade80;" oninput="onRgbSliderChange()" onchange="saveCustomRgbTheme()" />
+          <span class="rgb-val" id="rgbGVal">29</span>
+        </div>
+
+        <div class="rgb-row">
+          <span class="rgb-channel-label" style="color:#60a5fa;">B</span>
+          <input type="range" id="rgbB" min="0" max="255" value="56" style="accent-color:#60a5fa;" oninput="onRgbSliderChange()" onchange="saveCustomRgbTheme()" />
+          <span class="rgb-val" id="rgbBVal">56</span>
         </div>
       </div>
     </div>
@@ -1221,7 +1440,12 @@
   </nav>
 </div>
 
-<!-- MODAL: ELOLVASOTT KÖNYVEK LISTÁJA (POLCRA KATTINTÁSKOR) -->
+<!-- MODAL: BARÁTOK / FÜGGŐBEN LÉVŐ BARÁTOK LISTA -->
+<div id="followModal" class="modal-overlay">
+  <div class="modal-sheet" id="followModalContent"></div>
+</div>
+
+<!-- MODAL: ELOLVASOTT KÖNYVEK LISTÁJA -->
 <div id="shelfPickerModal" class="modal-overlay">
   <div class="modal-sheet" id="shelfPickerContent"></div>
 </div>
@@ -1259,11 +1483,13 @@
           <input type="number" id="newPages" class="form-input" placeholder="Pl. 352" min="1" />
         </div>
         <div class="form-group">
-          <label class="form-label">Polc</label>
+          <label class="form-label">Státusz / Polc</label>
           <select id="newStatus" class="form-select">
             <option value="reading">Épp olvasom</option>
-            <option value="tbr">Kívánságlista</option>
+            <option value="queue">Várólista</option>
             <option value="finished">Elolvasva</option>
+            <option value="tbr">Kívánságlista</option>
+            <option value="dnf">Félbehagyott</option>
           </select>
         </div>
       </div>
@@ -1289,7 +1515,6 @@
 </div>
 
 <script>
-  // IDE ILLESZD BE A SAJÁT SUPABASE ADATAIDAT:
   const SUPABASE_URL = "https://lryvugghhicwaqxyrald.supabase.co";
   const SUPABASE_KEY = "sb_publishable_00eSzYgKEV7WBYw4quZyhw_yodoaDxl";
 
@@ -1304,6 +1529,7 @@
 
   const SPINE_COLORS = ["#38BDF8", "#2DD4BF", "#FACC15", "#FB7185", "#A78BFA", "#4ADE80"];
   const MONTHS_HU = ["Jan", "Feb", "Már", "Ápr", "Máj", "Jún", "Júl", "Aug", "Szep", "Okt", "Nov", "Dec"];
+  const CURRENT_YEAR = new Date().getFullYear();
 
   let currentUser = null;
   let userProfile = {
@@ -1311,19 +1537,23 @@
     email: "",
     goal: 24,
     theme: "crimson",
+    rgb: { r: 184, g: 29, b: 56 },
     custom_vibes: [...DEFAULT_VIBES]
   };
   let booksList = [];
   let friendsList = [];
   let incomingRequests = [];
+  let outgoingRequests = [];
   let receivedRecs = [];
   let sentRecs = [];
   let pendingChatImage = "";
 
   let authMode = "login";
   let currentFilter = "reading";
+  let statsSelectedYear = CURRENT_YEAR;
   let activeBookId = null;
   let selectedShareQuoteIndices = new Set([0]);
+  let rgbSaveTimer = null;
 
   function escapeHtml(str) {
     return String(str || "")
@@ -1356,15 +1586,143 @@
     if (profUserEl) profUserEl.textContent = u ? `@${u}` : "-";
   }
 
-  function applyTheme(theme) {
-    document.documentElement.setAttribute("data-theme", theme || "crimson");
-    document.getElementById("themeCrimson").classList.toggle("active", theme !== "nordic");
-    document.getElementById("themeNordic").classList.toggle("active", theme === "nordic");
+  function clampRgb(n) {
+    const num = Number(n);
+    if (Number.isNaN(num)) return 0;
+    return Math.max(0, Math.min(255, Math.round(num)));
+  }
+
+  function rgbToHex(r, g, b) {
+    return "#" + [r, g, b].map(x => clampRgb(x).toString(16).padStart(2, "0")).join("").toUpperCase();
+  }
+
+  function parseThemeConfig(rawTheme) {
+    if (typeof rawTheme === "string" && rawTheme.startsWith("rgb:")) {
+      const parts = rawTheme.slice(4).split(",").map(Number);
+      if (parts.length === 3 && parts.every(n => !Number.isNaN(n))) {
+        return {
+          mode: "rgb",
+          rgb: { r: clampRgb(parts[0]), g: clampRgb(parts[1]), b: clampRgb(parts[2]) }
+        };
+      }
+    }
+    if (rawTheme === "nordic") {
+      return { mode: "nordic", rgb: { r: 56, g: 189, b: 248 } };
+    }
+    return { mode: "crimson", rgb: { r: 184, g: 29, b: 56 } };
+  }
+
+  function clearCustomAccentStyles() {
+    const root = document.documentElement;
+    ["--accent", "--accent-hover", "--accent-soft", "--accent-glow"].forEach(prop => {
+      root.style.removeProperty(prop);
+    });
+  }
+
+  function applyTheme(themeVal, customRgb = null) {
+    const parsed = parseThemeConfig(themeVal);
+    const rgb = customRgb
+      ? { r: clampRgb(customRgb.r), g: clampRgb(customRgb.g), b: clampRgb(customRgb.b) }
+      : parsed.rgb;
+
+    const isRgb = parsed.mode === "rgb" || Boolean(customRgb);
+    const activeMode = isRgb ? "rgb" : parsed.mode;
+
+    document.documentElement.setAttribute("data-theme", activeMode === "nordic" ? "nordic" : "crimson");
+
+    if (activeMode === "rgb") {
+      const { r, g, b } = rgb;
+      const hoverR = clampRgb(r + 22);
+      const hoverG = clampRgb(g + 22);
+      const hoverB = clampRgb(b + 22);
+      const root = document.documentElement;
+      root.style.setProperty("--accent", `rgb(${r}, ${g}, ${b})`);
+      root.style.setProperty("--accent-hover", `rgb(${hoverR}, ${hoverG}, ${hoverB})`);
+      root.style.setProperty("--accent-soft", `rgba(${r}, ${g}, ${b}, 0.17)`);
+      root.style.setProperty("--accent-glow", `rgba(${r}, ${g}, ${b}, 0.35)`);
+    } else {
+      clearCustomAccentStyles();
+    }
+
+    const cBtn = document.getElementById("themeCrimson");
+    const nBtn = document.getElementById("themeNordic");
+    const xBtn = document.getElementById("themeCustom");
+    if (cBtn) cBtn.classList.toggle("active", activeMode === "crimson");
+    if (nBtn) nBtn.classList.toggle("active", activeMode === "nordic");
+    if (xBtn) xBtn.classList.toggle("active", activeMode === "rgb");
+
+    const rInput = document.getElementById("rgbR");
+    const gInput = document.getElementById("rgbG");
+    const bInput = document.getElementById("rgbB");
+    if (rInput && gInput && bInput) {
+      rInput.value = rgb.r;
+      gInput.value = rgb.g;
+      bInput.value = rgb.b;
+      syncRgbLabels(rgb.r, rgb.g, rgb.b);
+    }
+  }
+
+  function syncRgbLabels(r, g, b) {
+    const hex = rgbToHex(r, g, b);
+    const rVal = document.getElementById("rgbRVal");
+    const gVal = document.getElementById("rgbGVal");
+    const bVal = document.getElementById("rgbBVal");
+    const swatch = document.getElementById("customRgbSwatch");
+    const hexLabel = document.getElementById("customRgbHexLabel");
+    const pill = document.getElementById("rgbLivePreviewPill");
+    if (rVal) rVal.textContent = r;
+    if (gVal) gVal.textContent = g;
+    if (bVal) bVal.textContent = b;
+    if (swatch) swatch.style.background = `rgb(${r}, ${g}, ${b})`;
+    if (hexLabel) hexLabel.textContent = hex;
+    if (pill) {
+      pill.textContent = `rgb(${r}, ${g}, ${b}) • ${hex}`;
+      pill.style.background = `rgb(${r}, ${g}, ${b})`;
+    }
+  }
+
+  function onRgbSliderChange() {
+    const r = clampRgb(document.getElementById("rgbR")?.value);
+    const g = clampRgb(document.getElementById("rgbG")?.value);
+    const b = clampRgb(document.getElementById("rgbB")?.value);
+    userProfile.rgb = { r, g, b };
+    userProfile.theme = `rgb:${r},${g},${b}`;
+    applyTheme(userProfile.theme, userProfile.rgb);
+    clearTimeout(rgbSaveTimer);
+    rgbSaveTimer = setTimeout(() => { saveCustomRgbTheme(true); }, 350);
+  }
+
+  function selectCustomRgbMode() {
+    const r = clampRgb(document.getElementById("rgbR")?.value ?? userProfile.rgb?.r ?? 184);
+    const g = clampRgb(document.getElementById("rgbG")?.value ?? userProfile.rgb?.g ?? 29);
+    const b = clampRgb(document.getElementById("rgbB")?.value ?? userProfile.rgb?.b ?? 56);
+    userProfile.rgb = { r, g, b };
+    userProfile.theme = `rgb:${r},${g},${b}`;
+    applyTheme(userProfile.theme, userProfile.rgb);
+    saveCustomRgbTheme(true);
+  }
+
+  async function saveCustomRgbTheme(silent = false) {
+    const r = clampRgb(document.getElementById("rgbR")?.value ?? userProfile.rgb?.r ?? 184);
+    const g = clampRgb(document.getElementById("rgbG")?.value ?? userProfile.rgb?.g ?? 29);
+    const b = clampRgb(document.getElementById("rgbB")?.value ?? userProfile.rgb?.b ?? 56);
+    const themeStr = `rgb:${r},${g},${b}`;
+    userProfile.rgb = { r, g, b };
+    userProfile.theme = themeStr;
+    if (sbClient && currentUser) {
+      await sbClient.from("profiles").update({ theme: themeStr }).eq("id", currentUser.id);
+    }
+    if (!silent) showToast("Egyedi RGB téma mentve!");
   }
 
   async function setTheme(theme) {
     userProfile.theme = theme;
-    applyTheme(theme);
+    if (theme === "nordic") {
+      userProfile.rgb = { r: 56, g: 189, b: 248 };
+    } else if (theme === "crimson") {
+      userProfile.rgb = { r: 184, g: 29, b: 56 };
+    }
+    applyTheme(theme, userProfile.rgb);
     if (sbClient && currentUser) {
       await sbClient.from("profiles").update({ theme }).eq("id", currentUser.id);
     }
@@ -1483,16 +1841,20 @@
       if (upserted) prof = upserted;
     }
 
+    const loadedTheme = prof?.theme || "crimson";
+    const parsedTheme = parseThemeConfig(loadedTheme);
+
     userProfile = {
       username: prof?.username || cleanPreferred || "olvaso",
       email: prof?.email || user.email || "",
       goal: prof?.goal || 24,
-      theme: prof?.theme || "crimson",
+      theme: loadedTheme,
+      rgb: parsedTheme.rgb,
       custom_vibes: Array.isArray(prof?.custom_vibes) ? prof.custom_vibes : [...DEFAULT_VIBES]
     };
 
     applyBranding();
-    applyTheme(userProfile.theme);
+    applyTheme(userProfile.theme, userProfile.rgb);
     renderProfile();
 
     await loadBooksFromSupabase();
@@ -1506,11 +1868,19 @@
     booksList = [];
     friendsList = [];
     incomingRequests = [];
+    outgoingRequests = [];
     receivedRecs = [];
     sentRecs = [];
     pendingChatImage = "";
     document.getElementById("authScreen").style.display = "flex";
     showToast("Kijelentkeztél.");
+  }
+
+  function normalizeBookStatus(rawStatus, inQueueFlag) {
+    const valid = ["reading", "queue", "finished", "tbr", "dnf"];
+    if (valid.includes(rawStatus)) return rawStatus;
+    if (inQueueFlag) return "queue";
+    return "reading";
   }
 
   async function loadBooksFromSupabase() {
@@ -1527,22 +1897,199 @@
       .order("created_at", { ascending: false });
 
     if (!error && data) {
-      booksList = data.map(row => ({
-        id: row.id,
-        title: row.title,
-        author: row.author,
-        pages: row.pages,
-        currentPage: row.current_page,
-        status: row.status,
-        finishedMonth: row.finished_month,
-        rating: Number(row.rating) || 0,
-        cover: row.cover || "",
-        vibes: Array.isArray(row.vibes) ? row.vibes : [],
-        location: row.location || "",
-        notes: row.notes || "",
-        quotes: Array.isArray(row.quotes) ? row.quotes : []
-      }));
+      booksList = data.map(row => {
+        const inferredYear = row.finished_year
+          ? Number(row.finished_year)
+          : (row.created_at ? new Date(row.created_at).getFullYear() : CURRENT_YEAR);
+        const status = normalizeBookStatus(row.status, Boolean(row.in_queue));
+        return {
+          id: row.id,
+          title: row.title,
+          author: row.author,
+          pages: row.pages,
+          currentPage: row.current_page,
+          status,
+          finishedMonth: row.finished_month,
+          finishedYear: status === "finished" ? inferredYear : null,
+          rating: Number(row.rating) || 0,
+          cover: row.cover || "",
+          vibes: Array.isArray(row.vibes) ? row.vibes : [],
+          location: row.location || "",
+          notes: row.notes || "",
+          quotes: Array.isArray(row.quotes) ? row.quotes : []
+        };
+      });
     }
+  }
+
+  function updateFriendCounters() {
+    const accEl = document.getElementById("friendsAcceptedCount");
+    const pendEl = document.getElementById("friendsPendingCount");
+    const totalPending = outgoingRequests.length + incomingRequests.length;
+    if (accEl) accEl.textContent = friendsList.length;
+    if (pendEl) pendEl.textContent = totalPending;
+  }
+
+  async function openFollowModal(tab = "friends") {
+    await loadSocialFromSupabase();
+    renderFollowModalContent(tab);
+    document.getElementById("followModal").classList.add("open");
+  }
+
+  function renderFollowModalContent(tab = "friends") {
+    const isFriendsTab = tab === "friends";
+    const totalPending = outgoingRequests.length + incomingRequests.length;
+
+    let itemsHtml = "";
+    if (isFriendsTab) {
+      itemsHtml = friendsList.length > 0
+        ? friendsList.map(person => `
+            <div class="social-card" style="margin-bottom:8px;">
+              <div class="friend-row">
+                <div style="display:flex; align-items:center; gap:10px;">
+                  <div class="friend-avatar">${(person.username[0] || "?").toUpperCase()}</div>
+                  <div>
+                    <div style="font-weight:600; font-size:14px;">@${escapeHtml(person.username)}</div>
+                    <div style="font-size:11px; color:var(--text-muted);">Kölcsönös barát</div>
+                  </div>
+                </div>
+                <div style="display:flex; gap:6px;">
+                  <button type="button" class="mini-btn" onclick="closeModal('followModal'); switchView('friends', document.querySelectorAll('.nav-item')[2]); openChatWith('${person.id}')">Üzenet</button>
+                  <button type="button" class="mini-btn danger" onclick="removeFriendFromModal('${person.id}', '${escapeHtml(person.username)}', '${tab}')">Törlés</button>
+                </div>
+              </div>
+            </div>
+          `).join("")
+        : `<div style="font-size:13px; color:var(--text-muted); padding:14px 0;">Még nincs visszajelölt barátod.</div>`;
+    } else {
+      const incomingHtml = incomingRequests.map(req => `
+        <div class="social-card" style="margin-bottom:8px;">
+          <div class="friend-row">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <div class="friend-avatar">${(req.username[0] || "?").toUpperCase()}</div>
+              <div>
+                <div style="font-weight:600; font-size:14px;">@${escapeHtml(req.username)}</div>
+                <div style="font-size:11px; color:var(--accent);">Bejövő jelölés • Rád vár</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:6px;">
+              <button type="button" class="mini-btn accent" onclick="acceptFriendFromModal('${req.friendshipId}', '${escapeHtml(req.username)}')">Visszajelölés</button>
+              <button type="button" class="mini-btn" onclick="declineFriendFromModal('${req.friendshipId}')">✕</button>
+            </div>
+          </div>
+        </div>
+      `).join("");
+
+      const outgoingHtml = outgoingRequests.map(req => `
+        <div class="social-card" style="margin-bottom:8px;">
+          <div class="friend-row">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <div class="friend-avatar">${(req.username[0] || "?").toUpperCase()}</div>
+              <div>
+                <div style="font-weight:600; font-size:14px;">@${escapeHtml(req.username)}</div>
+                <div style="font-size:11px; color:var(--text-muted);">Elküldve • Visszajelölésre vár</div>
+              </div>
+            </div>
+            <button type="button" class="mini-btn danger" onclick="cancelOutgoingFromModal('${req.friendshipId}', '${escapeHtml(req.username)}')">Visszavonás</button>
+          </div>
+        </div>
+      `).join("");
+
+      itemsHtml = (incomingHtml + outgoingHtml) || `<div style="font-size:13px; color:var(--text-muted); padding:14px 0;">Nincs függőben lévő barátkérelmed.</div>`;
+    }
+
+    document.getElementById("followModalContent").innerHTML = `
+      <div class="modal-header">
+        <div>
+          <h3 style="font-family: var(--font-serif); font-size: 22px;">@${escapeHtml(userProfile.username || "profil")}</h3>
+          <div style="font-size: 12px; color: var(--text-muted);">Elfogadott és függőben lévő barátok</div>
+        </div>
+        <button class="modal-close" onclick="closeModal('followModal')">✕</button>
+      </div>
+
+      <div class="auth-switch-tabs" style="margin-bottom:14px;">
+        <button type="button" class="auth-tab-btn ${isFriendsTab ? "active" : ""}" onclick="renderFollowModalContent('friends')">Barátok (${friendsList.length})</button>
+        <button type="button" class="auth-tab-btn ${!isFriendsTab ? "active" : ""}" onclick="renderFollowModalContent('pending')">Függőben (${totalPending})</button>
+      </div>
+
+      <div class="form-group" style="margin-bottom:14px;">
+        <label class="form-label">Új barát jelölése felhasználónév alapján</label>
+        <div style="display:flex; gap:8px;">
+          <input type="text" id="modalFriendSearchInput" class="form-input" placeholder="pl. anna_olvas" onkeydown="if(event.key==='Enter') sendFriendReqFromModal()" />
+          <button type="button" class="btn-primary" style="width:auto; padding:0 14px;" onclick="sendFriendReqFromModal()">Jelölés</button>
+        </div>
+      </div>
+
+      ${itemsHtml}
+    `;
+  }
+
+  async function sendFriendReqFromModal() {
+    if (!sbClient) return;
+    const { data: authData } = await sbClient.auth.getUser();
+    const activeUid = authData?.user?.id || currentUser?.id;
+    if (!activeUid) return;
+
+    const input = document.getElementById("modalFriendSearchInput");
+    const q = (input?.value || "").trim().toLowerCase().replace(/^@+/, "").replace(/[^a-z0-9_]/g, "");
+    if (!q) return;
+
+    if (q === (userProfile.username || "").toLowerCase()) {
+      showToast("Saját magadat nem tudod jelölni!");
+      return;
+    }
+
+    const { data: targetUser, error: findErr } = await sbClient
+      .from("profiles")
+      .select("id, username")
+      .ilike("username", q)
+      .limit(1)
+      .maybeSingle();
+
+    if (findErr || !targetUser) {
+      showToast("Nem található ilyen felhasználónév: @" + q);
+      return;
+    }
+
+    if (targetUser.id === activeUid) return;
+
+    const { error } = await sbClient.from("friendships").insert({
+      requester_id: activeUid,
+      addressee_id: targetUser.id,
+      status: "pending"
+    });
+
+    if (error) {
+      showToast("Már küldtél kérelmet vagy már barátok vagytok!");
+      return;
+    }
+
+    if (input) input.value = "";
+    showToast("Jelölés elküldve @" + targetUser.username + " részére (Függőben).");
+    await loadSocialFromSupabase();
+    renderFollowModalContent("pending");
+  }
+
+  async function acceptFriendFromModal(friendshipId, username) {
+    await acceptFriendRequest(friendshipId, username);
+    renderFollowModalContent("friends");
+  }
+
+  async function declineFriendFromModal(friendshipId) {
+    await declineFriendRequest(friendshipId);
+    renderFollowModalContent("pending");
+  }
+
+  async function cancelOutgoingFromModal(friendshipId, username) {
+    await sbClient.from("friendships").delete().eq("id", friendshipId);
+    showToast("Kérelem visszavonva: @" + username);
+    await loadSocialFromSupabase();
+    renderFollowModalContent("pending");
+  }
+
+  async function removeFriendFromModal(friendId, username, tab) {
+    await deleteFriend(friendId, username);
+    renderFollowModalContent(tab);
   }
 
   async function loadSocialFromSupabase() {
@@ -1554,6 +2101,7 @@
 
     friendsList = [];
     incomingRequests = [];
+    outgoingRequests = [];
     receivedRecs = [];
     sentRecs = [];
 
@@ -1563,7 +2111,8 @@
       .or(`requester_id.eq.${activeUid},addressee_id.eq.${activeUid}`);
 
     const friendEntries = [];
-    const pendingItems = [];
+    const pendingInItems = [];
+    const pendingOutItems = [];
 
     (fRows || []).forEach(r => {
       if (r.status === "accepted") {
@@ -1571,12 +2120,21 @@
         if (otherId && otherId !== activeUid && !friendEntries.some(e => e.id === otherId)) {
           friendEntries.push({ id: otherId, friendshipId: r.id });
         }
-      } else if (r.status === "pending" && r.addressee_id === activeUid && r.requester_id !== activeUid) {
-        pendingItems.push({ friendshipId: r.id, requesterId: r.requester_id });
+      } else if (r.status === "pending") {
+        if (r.addressee_id === activeUid && r.requester_id !== activeUid) {
+          pendingInItems.push({ friendshipId: r.id, userId: r.requester_id });
+        } else if (r.requester_id === activeUid && r.addressee_id !== activeUid) {
+          pendingOutItems.push({ friendshipId: r.id, userId: r.addressee_id });
+        }
       }
     });
 
-    const allUserIds = [...new Set([...friendEntries.map(e => e.id), ...pendingItems.map(p => p.requesterId)])];
+    const allUserIds = [...new Set([
+      ...friendEntries.map(e => e.id),
+      ...pendingInItems.map(p => p.userId),
+      ...pendingOutItems.map(p => p.userId)
+    ])];
+
     let profilesMap = {};
     if (allUserIds.length > 0) {
       const { data: pRows } = await sbClient
@@ -1592,10 +2150,16 @@
       username: profilesMap[e.id] || "felhasznalo"
     }));
 
-    incomingRequests = pendingItems.map(p => ({
+    incomingRequests = pendingInItems.map(p => ({
       friendshipId: p.friendshipId,
-      id: p.requesterId,
-      username: profilesMap[p.requesterId] || "felhasznalo"
+      id: p.userId,
+      username: profilesMap[p.userId] || "felhasznalo"
+    }));
+
+    outgoingRequests = pendingOutItems.map(p => ({
+      friendshipId: p.friendshipId,
+      id: p.userId,
+      username: profilesMap[p.userId] || "felhasznalo"
     }));
 
     const { data: recRows } = await sbClient
@@ -1624,6 +2188,7 @@
     receivedRecs = mappedRecs.filter(r => r.to_user === activeUid && !r.hidden_by_recipient);
     sentRecs = mappedRecs.filter(r => r.from_user === activeUid && !r.hidden_by_sender);
 
+    updateFriendCounters();
     updateFriendsBadge();
   }
 
@@ -1732,13 +2297,17 @@
 
     const statusLabels = {
       reading: "Olvasom",
+      queue: "Várólista",
       finished: "Kész",
       tbr: "Kívánságlista",
       dnf: "Félbehagyva"
     };
 
     if (filtered.length === 0) {
-      grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding: 30px 20px; color: var(--text-muted); font-size: 13px;">Még nincs könyv ezen a polcon. Nyomj a lenti + gombra!</div>`;
+      const emptyMsg = currentFilter === "queue"
+        ? "Még nincs könyv a várólistádon. Állíts egy könyv státuszát Várólistára, vagy vegyél fel újat!"
+        : "Még nincs könyv ezen a polcon. Nyomj a lenti + gombra!";
+      grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding: 30px 20px; color: var(--text-muted); font-size: 13px;">${emptyMsg}</div>`;
       return;
     }
 
@@ -1748,8 +2317,8 @@
         ? `<img src="${book.cover}" alt="${book.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" /><div class="cover-placeholder" style="display:none;"><span>${book.title}</span></div>`
         : `<div class="cover-placeholder"><span>${book.title}</span></div>`;
 
-      const metaBottom = book.status === "tbr"
-        ? `<span>${book.pages} oldal</span><span>Kívánságlistán</span>`
+      const metaBottom = (book.status === "tbr" || book.status === "queue")
+        ? `<span>${book.pages} oldal</span><span>${statusLabels[book.status] || book.status}</span>`
         : `<span>${book.rating ? "★ " + book.rating : "Nincs értékelve"}</span><span>${book.status === "finished" ? "100%" : progress + "%"}</span>`;
 
       return `
@@ -1781,11 +2350,33 @@
     });
   });
 
-  function renderStats() {
-    document.getElementById("statsYearLabel").textContent = new Date().getFullYear();
+  function changeStatsYear(delta) {
     const finishedBooks = booksList.filter(b => b.status === "finished");
+    const years = finishedBooks.map(b => b.finishedYear || CURRENT_YEAR);
+    const minYear = years.length > 0 ? Math.min(...years, CURRENT_YEAR - 5) : CURRENT_YEAR - 5;
+    const nextYear = statsSelectedYear + delta;
+    if (nextYear < minYear || nextYear > CURRENT_YEAR) return;
+    statsSelectedYear = nextYear;
+    renderStats();
+  }
+
+  function renderStats() {
+    const finishedBooks = booksList.filter(b => b.status === "finished");
+    const years = finishedBooks.map(b => b.finishedYear || CURRENT_YEAR);
+    const minYear = years.length > 0 ? Math.min(...years, CURRENT_YEAR - 5) : CURRENT_YEAR - 5;
+    if (statsSelectedYear > CURRENT_YEAR) statsSelectedYear = CURRENT_YEAR;
+    if (statsSelectedYear < minYear) statsSelectedYear = minYear;
+
+    const yearLabelEl = document.getElementById("statsYearLabel");
+    if (yearLabelEl) yearLabelEl.textContent = String(statsSelectedYear);
+
+    const prevBtn = document.getElementById("prevYearBtn");
+    const nextBtn = document.getElementById("nextYearBtn");
+    if (prevBtn) prevBtn.disabled = statsSelectedYear <= minYear;
+    if (nextBtn) nextBtn.disabled = statsSelectedYear >= CURRENT_YEAR;
+
     const totalPages = booksList.reduce((sum, b) => sum + (Number(b.currentPage) || 0), 0);
-    const ratedBooks = booksList.filter(b => b.rating > 0 && b.status !== "tbr");
+    const ratedBooks = booksList.filter(b => b.rating > 0 && b.status !== "tbr" && b.status !== "queue");
     const avgRating = ratedBooks.length
       ? (ratedBooks.reduce((sum, b) => sum + b.rating, 0) / ratedBooks.length).toFixed(1)
       : "0.0";
@@ -1803,8 +2394,10 @@
 
     const monthlyCounts = new Array(12).fill(0);
     finishedBooks.forEach(b => {
-      const m = typeof b.finishedMonth === "number" ? b.finishedMonth : new Date().getMonth();
-      monthlyCounts[m]++;
+      const bYear = b.finishedYear || CURRENT_YEAR;
+      if (bYear === statsSelectedYear && typeof b.finishedMonth === "number" && b.finishedMonth >= 0 && b.finishedMonth < 12) {
+        monthlyCounts[b.finishedMonth]++;
+      }
     });
     const maxCount = Math.max(...monthlyCounts, 1);
 
@@ -1821,12 +2414,14 @@
 
     const counts = {
       reading: booksList.filter(b => b.status === "reading").length,
+      queue: booksList.filter(b => b.status === "queue").length,
       finished: finishedBooks.length,
       tbr: booksList.filter(b => b.status === "tbr").length,
       dnf: booksList.filter(b => b.status === "dnf").length
     };
     document.getElementById("shelfBreakdown").innerHTML = `
       <div style="display:flex; justify-content:space-between;"><span>Épp olvasom:</span><strong style="color:var(--text-main);">${counts.reading} db</strong></div>
+      <div style="display:flex; justify-content:space-between;"><span>Várólista:</span><strong style="color:var(--text-main);">${counts.queue} db</strong></div>
       <div style="display:flex; justify-content:space-between;"><span>Elolvasva:</span><strong style="color:var(--text-main);">${counts.finished} db</strong></div>
       <div style="display:flex; justify-content:space-between;"><span>Kívánságlista:</span><strong style="color:var(--text-main);">${counts.tbr} db</strong></div>
       <div style="display:flex; justify-content:space-between;"><span>Félbehagyott:</span><strong style="color:var(--text-main);">${counts.dnf} db</strong></div>
@@ -2026,6 +2621,7 @@
     }
 
     document.getElementById("friendSearchInput").value = "";
+    await loadSocialFromSupabase();
     showToast("Barátkérelem elküldve @" + targetUser.username + " részére!");
   }
 
@@ -2124,7 +2720,9 @@
       pages: Number(rec.pages) > 0 ? Number(rec.pages) : 300,
       current_page: 0,
       status: "tbr",
+      in_queue: false,
       finished_month: null,
+      finished_year: null,
       rating: 0,
       cover: rec.cover || "",
       vibes: [],
@@ -2181,7 +2779,7 @@
         .eq("id", recId);
 
       if (error) {
-        showToast("Hiba a mentéskor (futtasd le az SQL-t): " + error.message);
+        showToast("Hiba a mentéskor: " + error.message);
         return;
       }
     }
@@ -2298,16 +2896,18 @@
     document.getElementById("profEmail").textContent = userProfile.email || currentUser?.email || "-";
     document.getElementById("profUsernameReadonly").textContent = userProfile.username ? `@${userProfile.username}` : "-";
     document.getElementById("profGoal").value = userProfile.goal || 24;
-    applyTheme(userProfile.theme || "crimson");
+    updateFriendCounters();
+    applyTheme(userProfile.theme || "crimson", userProfile.rgb);
   }
 
   async function saveProfile() {
     const newGoal = parseInt(document.getElementById("profGoal").value, 10) || 24;
+    const themeToSave = userProfile.theme || "crimson";
 
     if (sbClient && currentUser) {
       const { error } = await sbClient
         .from("profiles")
-        .update({ goal: newGoal })
+        .update({ goal: newGoal, theme: themeToSave })
         .eq("id", currentUser.id);
 
       if (error) {
@@ -2432,6 +3032,7 @@
     document.getElementById("newTitle").value = "";
     document.getElementById("newAuthor").value = "";
     document.getElementById("newPages").value = "";
+    document.getElementById("newStatus").value = "reading";
     document.getElementById("newCover").value = "";
     document.getElementById("newCoverPreview").textContent = "";
     document.getElementById("addModal").classList.add("open");
@@ -2465,6 +3066,7 @@
       currentPage: status === "finished" ? pages : 0,
       status,
       finishedMonth: status === "finished" ? new Date().getMonth() : null,
+      finishedYear: status === "finished" ? CURRENT_YEAR : null,
       rating: 0,
       cover,
       vibes: [],
@@ -2486,7 +3088,9 @@
         pages: newBookObj.pages,
         current_page: newBookObj.currentPage,
         status: newBookObj.status,
+        in_queue: false,
         finished_month: newBookObj.finishedMonth,
+        finished_year: newBookObj.finishedYear,
         rating: 0,
         cover: newBookObj.cover,
         vibes: [],
@@ -2508,8 +3112,12 @@
     if (sbClient && currentUser) {
       const dbUpdates = {};
       if ("currentPage" in updates) dbUpdates.current_page = updates.currentPage;
-      if ("status" in updates) dbUpdates.status = updates.status;
+      if ("status" in updates) {
+        dbUpdates.status = updates.status;
+        dbUpdates.in_queue = false;
+      }
       if ("finishedMonth" in updates) dbUpdates.finished_month = updates.finishedMonth;
+      if ("finishedYear" in updates) dbUpdates.finished_year = updates.finishedYear;
       if ("rating" in updates) dbUpdates.rating = updates.rating;
       if ("cover" in updates) dbUpdates.cover = updates.cover;
       if ("vibes" in updates) dbUpdates.vibes = updates.vibes;
@@ -2525,6 +3133,7 @@
     const statusTextMap = {
       finished: "ELOLVASVA",
       reading: "OLVASÁS ALATT",
+      queue: "VÁRÓLISTA",
       tbr: "KÍVÁNSÁGLISTA",
       dnf: "FÉLBEHAGYVA"
     };
@@ -2567,7 +3176,7 @@
       selectedShareQuoteIndices = new Set([...selectedShareQuoteIndices].filter(i => i >= 0 && i <= maxIdx));
     }
 
-    const isTBR = book.status === "tbr";
+    const isUnstartedShelf = book.status === "tbr" || book.status === "queue";
     const ratings = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5];
     const libTitle = getLibraryTitle().toUpperCase();
     const shareStatusLine = getShareStatusLine(book);
@@ -2588,16 +3197,35 @@
       ? selectedQuotes.map(q => `<div style="font-family: var(--font-serif); font-style: italic; font-size: 14px; color: var(--text-main); margin-top: 6px;">„${q}”</div>`).join("")
       : "";
 
-    const readingFieldsHtml = isTBR ? `
+    const statusHintText = book.status === "queue"
+      ? "Ez a könyv jelenleg a <strong>Várólistádon</strong> van. Ha elkezded olvasni, állítsd át a státuszát <em>Épp olvasom</em>-ra!"
+      : "Ez a könyv jelenleg a <strong>Kívánságlistádon</strong> van. Amint átállítod <em>Épp olvasom</em> státuszra, megjelenik az oldalszámláló, az értékelés és az idézetek is!";
+
+    const readingFieldsHtml = isUnstartedShelf ? `
       <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 14px; margin-bottom: 16px; font-size: 13px; color: var(--text-muted);">
-        Ez a könyv jelenleg a <strong>Kívánságlistádon</strong> van. Amint átállítod <em>Épp olvasom</em> státuszra, megjelenik az oldalszámláló, az értékelés és az idézetek is!
+        ${statusHintText}
       </div>
     ` : `
       <div class="form-group">
-        <label class="form-label">Hol tartasz? (<span id="pageLabel">${book.currentPage}</span> / ${book.pages} oldal)</label>
+        <div class="page-stepper-header">
+          <label class="form-label" style="margin:0;">Hol tartasz?</label>
+          <span class="page-badge-pill">📖 <span id="pageLabel">${book.currentPage}</span> / ${book.pages} oldal</span>
+        </div>
         <input type="range" id="pageSlider" min="0" max="${book.pages}" value="${book.currentPage}" style="width:100%; accent-color: var(--accent);"
-          oninput="document.getElementById('pageLabel').textContent = this.value"
+          oninput="updateLivePagePreview(Number(this.value), ${book.pages})"
           onchange="handlePageSlide(Number(this.value))" />
+        <div class="page-manual-row">
+          <label for="pageManualInput" style="font-family:var(--font-mono); font-size:11px; color:var(--text-muted);">Kézi oldal:</label>
+          <input type="number" id="pageManualInput" class="page-manual-input" min="0" max="${book.pages}" value="${book.currentPage}"
+            oninput="updateLivePagePreview(Number(this.value), ${book.pages})"
+            onchange="handlePageSlide(Number(this.value))"
+            onkeydown="if(event.key==='Enter'){ event.preventDefault(); handlePageSlide(Number(this.value)); }" />
+          <span style="font-family:var(--font-mono); font-size:12px; color:var(--text-muted);">/ ${book.pages}</span>
+        </div>
+        <div class="page-step-controls">
+          <button type="button" class="step-btn" onclick="stepPageBy(-1)">◀ -1 oldal</button>
+          <button type="button" class="step-btn" onclick="stepPageBy(1)">+1 oldal ▶</button>
+        </div>
       </div>
 
       <div class="form-group">
@@ -2658,9 +3286,10 @@
       </div>
 
       <div class="form-group">
-        <label class="form-label">Állapot</label>
+        <label class="form-label">Státusz / Polc</label>
         <select id="detStatus" class="form-select" onchange="handleStatusChange(this.value)">
           <option value="reading" ${book.status === "reading" ? "selected" : ""}>Épp olvasom</option>
+          <option value="queue" ${book.status === "queue" ? "selected" : ""}>Várólista</option>
           <option value="finished" ${book.status === "finished" ? "selected" : ""}>Elolvasva</option>
           <option value="tbr" ${book.status === "tbr" ? "selected" : ""}>Kívánságlista</option>
           <option value="dnf" ${book.status === "dnf" ? "selected" : ""}>Félbehagyott</option>
@@ -2688,18 +3317,39 @@
     document.getElementById("detailModal").classList.add("open");
   }
 
+  function updateLivePagePreview(val, maxPages) {
+    const clamped = Math.max(0, Math.min(maxPages, Number(val) || 0));
+    const lbl = document.getElementById("pageLabel");
+    if (lbl) lbl.textContent = String(clamped);
+    const slider = document.getElementById("pageSlider");
+    if (slider && document.activeElement !== slider) slider.value = String(clamped);
+    const manual = document.getElementById("pageManualInput");
+    if (manual && document.activeElement !== manual) manual.value = String(clamped);
+  }
+
+  async function stepPageBy(delta) {
+    const book = booksList.find(b => b.id === activeBookId);
+    if (!book) return;
+    const nextVal = Math.max(0, Math.min(book.pages, (Number(book.currentPage) || 0) + delta));
+    updateLivePagePreview(nextVal, book.pages);
+    await handlePageSlide(nextVal);
+  }
+
   async function handlePageSlide(val) {
     const book = booksList.find(b => b.id === activeBookId);
     if (!book) return;
+    const clamped = Math.max(0, Math.min(book.pages, Number(val) || 0));
 
-    const updates = { currentPage: val };
-    if (val >= book.pages && book.status !== "finished") {
+    const updates = { currentPage: clamped };
+    if (clamped >= book.pages && book.status !== "finished") {
       updates.status = "finished";
       updates.finishedMonth = new Date().getMonth();
+      updates.finishedYear = CURRENT_YEAR;
       showToast("Gratulálok, elolvastad! 🎉");
-    } else if (val < book.pages && book.status === "finished") {
+    } else if (clamped < book.pages && book.status === "finished") {
       updates.status = "reading";
       updates.finishedMonth = null;
+      updates.finishedYear = null;
     }
 
     await updateBookFields(activeBookId, updates);
@@ -2714,11 +3364,14 @@
     if (newStatus === "finished") {
       updates.currentPage = book.pages;
       updates.finishedMonth = new Date().getMonth();
-    } else if (newStatus === "tbr") {
+      updates.finishedYear = CURRENT_YEAR;
+    } else if (newStatus === "tbr" || newStatus === "queue") {
       updates.currentPage = 0;
       updates.finishedMonth = null;
+      updates.finishedYear = null;
     } else {
       updates.finishedMonth = null;
+      updates.finishedYear = null;
     }
 
     await updateBookFields(activeBookId, updates);
@@ -2772,11 +3425,15 @@
 
     const canvas = document.getElementById("shareCanvas");
     const ctx = canvas.getContext("2d");
-    const isNordic = userProfile.theme === "nordic";
+    const parsed = parseThemeConfig(userProfile.theme);
+    const isNordic = parsed.mode === "nordic";
+    const isRgb = parsed.mode === "rgb";
 
     const bg1 = isNordic ? "#0A0D10" : "#0B0B0D";
     const bg2 = isNordic ? "#1A222B" : "#1E1619";
-    const accent = isNordic ? "#38BDF8" : "#B81D38";
+    const accent = isRgb
+      ? `rgb(${userProfile.rgb.r}, ${userProfile.rgb.g}, ${userProfile.rgb.b})`
+      : (isNordic ? "#38BDF8" : "#B81D38");
 
     const grad = ctx.createLinearGradient(0, 0, 1080, 1350);
     grad.addColorStop(0, bg2);
