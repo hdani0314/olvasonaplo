@@ -5,13 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Könyvtára" />
+  <meta id="appleAppTitleMeta" name="apple-mobile-web-app-title" content="Könyvtára" />
+  <meta id="appNameMeta" name="application-name" content="Könyvtára" />
   <meta name="robots" content="noindex, nofollow" />
   <meta name="theme-color" content="#0B0B0D" />
   <title>Könyvtára</title>
   <link rel="icon" type="image/png" href="icon-512.png" />
   <link rel="apple-touch-icon" href="icon-512.png" />
-  <link rel="manifest" href="manifest.json" />
+  <link id="appManifestLink" rel="manifest" href="manifest.json" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -450,20 +451,119 @@
       flex-wrap: wrap;
     }
 
+    .avatar-wrap {
+      position: relative;
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+    }
+
+    .avatar-wrap.large {
+      width: 62px;
+      height: 62px;
+    }
+
+    .avatar-wrap.xl {
+      width: 118px;
+      height: 118px;
+      margin: 0 auto;
+    }
+
     .friend-avatar {
-      width: 38px;
-      height: 38px;
+      width: 100%;
+      height: 100%;
       border-radius: 50%;
-      background: var(--accent-soft);
-      border: 1px solid var(--accent);
-      color: var(--text-main);
-      font-family: var(--font-serif);
-      font-weight: 700;
-      font-size: 16px;
+      background: var(--bg-elevated);
+      border: 2px solid var(--accent);
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .friend-avatar svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .online-dot {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: #22c55e;
+      border: 2px solid var(--bg-card);
+      box-shadow: 0 0 8px rgba(34, 197, 94, 0.75);
+    }
+
+    .avatar-wrap.large .online-dot {
+      width: 14px;
+      height: 14px;
+    }
+
+    .status-line {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 2px;
+    }
+
+    .status-line.online {
+      color: #4ade80;
+      font-weight: 500;
+    }
+
+    .avatar-studio-section {
+      margin-bottom: 14px;
+    }
+
+    .avatar-swatches {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .avatar-swatch-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      cursor: pointer;
+      transition: transform 0.15s, border-color 0.15s;
+    }
+
+    .avatar-swatch-btn.active {
+      border-color: #fff;
+      transform: scale(1.12);
+      box-shadow: 0 0 0 2px var(--accent);
+    }
+
+    .avatar-option-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .avatar-pill-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 7px 12px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .avatar-pill-btn.active {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      color: var(--text-main);
     }
 
     .mini-btn {
@@ -1333,15 +1433,22 @@
   <!-- 4. PROFIL -->
   <section id="view-profile" class="view-section">
     <h1 class="section-heading">Profilom</h1>
-    <p class="section-sub">Fiók adatok, barátok, olvasási cél és RGB megjelenés.</p>
+    <p class="section-sub">Fiók adatok, egyedi karakter avatar, barátok és RGB megjelenés.</p>
 
     <div class="social-card" style="margin-bottom: 16px;">
-      <div style="display:flex; justify-content:space-between; align-items:center;">
-        <div>
-          <div style="font-size: 11px; font-family: var(--font-mono); color: var(--text-muted);">BEJELENTKEZVE</div>
-          <div style="font-weight: 600; font-size: 14px; margin-top: 2px;" id="profEmail">-</div>
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:10px;">
+        <div style="display:flex; align-items:center; gap:12px; min-width:0;">
+          <div id="profileAvatarPreview" onclick="openAvatarModal()" style="cursor:pointer;" title="Avatar szerkesztése"></div>
+          <div style="min-width:0;">
+            <div style="font-size: 11px; font-family: var(--font-mono); color: var(--text-muted);">BEJELENTKEZVE</div>
+            <div style="font-weight: 600; font-size: 14px; margin-top: 2px; overflow:hidden; text-overflow:ellipsis;" id="profEmail">-</div>
+          </div>
         </div>
         <button class="mini-btn" onclick="logoutUser()">Kijelentkezés</button>
+      </div>
+
+      <div style="margin-top:12px;">
+        <button type="button" class="btn-secondary" style="width:100%;" onclick="openAvatarModal()">✨ Avatar testreszabása (karakter szerkesztő)</button>
       </div>
 
       <div class="follow-stats-row">
@@ -1440,6 +1547,11 @@
   </nav>
 </div>
 
+<!-- MODAL: SNAPCHAT-STÍLUSÚ AVATAR SZERKESZTŐ -->
+<div id="avatarModal" class="modal-overlay">
+  <div class="modal-sheet" id="avatarModalContent"></div>
+</div>
+
 <!-- MODAL: BARÁTOK / FÜGGŐBEN LÉVŐ BARÁTOK LISTA -->
 <div id="followModal" class="modal-overlay">
   <div class="modal-sheet" id="followModalContent"></div>
@@ -1530,6 +1642,45 @@
   const SPINE_COLORS = ["#38BDF8", "#2DD4BF", "#FACC15", "#FB7185", "#A78BFA", "#4ADE80"];
   const MONTHS_HU = ["Jan", "Feb", "Már", "Ápr", "Máj", "Jún", "Júl", "Aug", "Szep", "Okt", "Nov", "Dec"];
   const CURRENT_YEAR = new Date().getFullYear();
+  const ACTIVE_WINDOW_MS = 3 * 60 * 1000;
+
+  const AVATAR_BG_COLORS = ["#FACC15", "#38BDF8", "#F472B6", "#34D399", "#A78BFA", "#FB923C", "#F87171", "#94A3B8"];
+  const AVATAR_SKIN_COLORS = ["#FDE0C8", "#F6C8A4", "#E2A679", "#C68658", "#8D5524", "#5C3818"];
+  const AVATAR_HAIR_COLORS = ["#1C1917", "#4A2E1B", "#854D27", "#D97706", "#EAB308", "#B91C1C", "#EC4899", "#E2E8F0"];
+  const AVATAR_SHIRT_COLORS = ["#B81D38", "#0284C7", "#16A34A", "#7C3AED", "#EA580C", "#1E293B", "#DB2777", "#F59E0B"];
+
+  const AVATAR_HAIR_STYLES = [
+    { id: "short", label: "Rövid" },
+    { id: "long", label: "Hosszú" },
+    { id: "curly", label: "Göndör" },
+    { id: "bun", label: "Konty" },
+    { id: "bald", label: "Kopasz" }
+  ];
+
+  const AVATAR_EXPRESSIONS = [
+    { id: "happy", label: "Mosolygós" },
+    { id: "wink", label: "Kacsintós" },
+    { id: "chill", label: "Laza" },
+    { id: "bookish", label: "Ámuló" }
+  ];
+
+  const AVATAR_ACCESSORIES = [
+    { id: "none", label: "Nincs" },
+    { id: "glasses", label: "Szemüveg" },
+    { id: "shades", label: "Napszemüveg" },
+    { id: "headphones", label: "Fejhallgató" },
+    { id: "beanie", label: "Sapka" }
+  ];
+
+  const DEFAULT_AVATAR_CFG = {
+    bg: "#FACC15",
+    skin: "#F6C8A4",
+    hairStyle: "short",
+    hairColor: "#1C1917",
+    expr: "happy",
+    acc: "none",
+    shirt: "#B81D38"
+  };
 
   let currentUser = null;
   let userProfile = {
@@ -1538,8 +1689,12 @@
     goal: 24,
     theme: "crimson",
     rgb: { r: 184, g: 29, b: 56 },
-    custom_vibes: [...DEFAULT_VIBES]
+    custom_vibes: [...DEFAULT_VIBES],
+    avatar_cfg: { ...DEFAULT_AVATAR_CFG },
+    last_seen: new Date().toISOString()
   };
+  let draftAvatarCfg = { ...DEFAULT_AVATAR_CFG };
+
   let booksList = [];
   let friendsList = [];
   let incomingRequests = [];
@@ -1554,6 +1709,9 @@
   let activeBookId = null;
   let selectedShareQuoteIndices = new Set([0]);
   let rgbSaveTimer = null;
+  let presenceInterval = null;
+  let lastPresencePushAt = 0;
+  let dynamicManifestUrl = null;
 
   function escapeHtml(str) {
     return String(str || "")
@@ -1575,9 +1733,392 @@
     return u ? `@${u} Könyvtára` : "Könyvtára";
   }
 
+  function getHomeScreenAppTitle() {
+    const u = (userProfile.username || "").trim();
+    return u ? `${u} Könyvtára` : "Könyvtára";
+  }
+
+  function syncDynamicAppManifest(appTitle) {
+    const appleMeta = document.getElementById("appleAppTitleMeta");
+    const appNameMeta = document.getElementById("appNameMeta");
+    const manifestLink = document.getElementById("appManifestLink");
+
+    if (appleMeta) appleMeta.setAttribute("content", appTitle);
+    if (appNameMeta) appNameMeta.setAttribute("content", appTitle);
+
+    if (manifestLink) {
+      const baseHref = window.location.href.split("#")[0];
+      const iconUrl = new URL("icon-512.png", baseHref).href;
+      const manifestData = {
+        name: appTitle,
+        short_name: appTitle,
+        start_url: baseHref,
+        display: "standalone",
+        background_color: "#0B0B0D",
+        theme_color: "#0B0B0D",
+        icons: [
+          {
+            src: iconUrl,
+            sizes: "512x512",
+            type: "image/png",
+            purpose: "any maskable"
+          }
+        ]
+      };
+
+      if (dynamicManifestUrl) {
+        URL.revokeObjectURL(dynamicManifestUrl);
+      }
+      const blob = new Blob([JSON.stringify(manifestData)], { type: "application/manifest+json" });
+      dynamicManifestUrl = URL.createObjectURL(blob);
+      manifestLink.setAttribute("href", dynamicManifestUrl);
+    }
+  }
+
+  function getDefaultAvatarForUsername(username) {
+    const u = String(username || "olvaso");
+    let hash = 0;
+    for (let i = 0; i < u.length; i++) {
+      hash = ((hash << 5) - hash) + u.charCodeAt(i);
+      hash |= 0;
+    }
+    const idx = Math.abs(hash);
+    return {
+      bg: AVATAR_BG_COLORS[idx % AVATAR_BG_COLORS.length],
+      skin: AVATAR_SKIN_COLORS[(idx >> 2) % AVATAR_SKIN_COLORS.length],
+      hairStyle: AVATAR_HAIR_STYLES[(idx >> 3) % AVATAR_HAIR_STYLES.length].id,
+      hairColor: AVATAR_HAIR_COLORS[(idx >> 4) % AVATAR_HAIR_COLORS.length],
+      expr: AVATAR_EXPRESSIONS[(idx >> 5) % AVATAR_EXPRESSIONS.length].id,
+      acc: AVATAR_ACCESSORIES[(idx >> 6) % AVATAR_ACCESSORIES.length].id,
+      shirt: AVATAR_SHIRT_COLORS[(idx >> 7) % AVATAR_SHIRT_COLORS.length]
+    };
+  }
+
+  function parseAvatarConfig(rawVal, fallbackUsername = "") {
+    if (rawVal && typeof rawVal === "object" && !Array.isArray(rawVal)) {
+      return { ...getDefaultAvatarForUsername(fallbackUsername), ...rawVal };
+    }
+    const str = String(rawVal || "").trim();
+    if (str.startsWith("avatar:")) {
+      try {
+        const parsed = JSON.parse(str.slice(7));
+        if (parsed && typeof parsed === "object") {
+          return { ...getDefaultAvatarForUsername(fallbackUsername), ...parsed };
+        }
+      } catch (e) {}
+    }
+    return getDefaultAvatarForUsername(fallbackUsername);
+  }
+
+  function serializeAvatarConfig(cfg) {
+    return "avatar:" + JSON.stringify(cfg);
+  }
+
+  function buildAvatarSvg(cfg) {
+    const c = { ...DEFAULT_AVATAR_CFG, ...(cfg || {}) };
+
+    let backHair = "";
+    if (c.hairStyle === "long") {
+      backHair = `<rect x="27" y="34" width="46" height="44" rx="20" fill="${c.hairColor}" />`;
+    } else if (c.hairStyle === "curly") {
+      backHair = `
+        <circle cx="30" cy="40" r="10" fill="${c.hairColor}" />
+        <circle cx="70" cy="40" r="10" fill="${c.hairColor}" />
+        <circle cx="27" cy="52" r="9" fill="${c.hairColor}" />
+        <circle cx="73" cy="52" r="9" fill="${c.hairColor}" />
+      `;
+    } else if (c.hairStyle === "bun") {
+      backHair = `<circle cx="50" cy="18" r="13" fill="${c.hairColor}" />`;
+    }
+
+    let frontHair = "";
+    if (c.hairStyle === "short") {
+      frontHair = `<path d="M29 44 C29 24, 71 24, 71 44 C66 34, 57 32, 50 35 C42 32, 34 34, 29 44 Z" fill="${c.hairColor}" />`;
+    } else if (c.hairStyle === "long") {
+      frontHair = `<path d="M28 45 C28 23, 72 23, 72 45 C66 33, 55 32, 50 36 C43 32, 34 33, 28 45 Z" fill="${c.hairColor}" />`;
+    } else if (c.hairStyle === "curly") {
+      frontHair = `
+        <circle cx="36" cy="30" r="9" fill="${c.hairColor}" />
+        <circle cx="50" cy="27" r="10" fill="${c.hairColor}" />
+        <circle cx="64" cy="30" r="9" fill="${c.hairColor}" />
+      `;
+    } else if (c.hairStyle === "bun") {
+      frontHair = `<path d="M30 43 C30 25, 70 25, 70 43 C63 34, 37 34, 30 43 Z" fill="${c.hairColor}" />`;
+    }
+
+    let eyesAndMouth = "";
+    if (c.expr === "wink") {
+      eyesAndMouth = `
+        <circle cx="42" cy="49" r="2.7" fill="#18181B" />
+        <path d="M54 49 Q58 46 62 49" stroke="#18181B" stroke-width="2.4" fill="none" stroke-linecap="round" />
+        <path d="M43 59 Q50 65 57 58" stroke="#18181B" stroke-width="2.4" fill="none" stroke-linecap="round" />
+      `;
+    } else if (c.expr === "chill") {
+      eyesAndMouth = `
+        <line x1="39" y1="49" x2="45" y2="49" stroke="#18181B" stroke-width="2.4" stroke-linecap="round" />
+        <line x1="55" y1="49" x2="61" y2="49" stroke="#18181B" stroke-width="2.4" stroke-linecap="round" />
+        <path d="M44 59 Q50 62 56 59" stroke="#18181B" stroke-width="2.3" fill="none" stroke-linecap="round" />
+      `;
+    } else if (c.expr === "bookish") {
+      eyesAndMouth = `
+        <circle cx="42" cy="49" r="3" fill="#18181B" />
+        <circle cx="58" cy="49" r="3" fill="#18181B" />
+        <circle cx="43" cy="48" r="1" fill="#FFFFFF" />
+        <circle cx="59" cy="48" r="1" fill="#FFFFFF" />
+        <ellipse cx="50" cy="60" rx="3.2" ry="4" fill="#991B1B" />
+      `;
+    } else {
+      eyesAndMouth = `
+        <circle cx="42" cy="49" r="2.7" fill="#18181B" />
+        <circle cx="58" cy="49" r="2.7" fill="#18181B" />
+        <path d="M43 58 Q50 65 57 58" stroke="#18181B" stroke-width="2.4" fill="none" stroke-linecap="round" />
+      `;
+    }
+
+    let accHtml = "";
+    if (c.acc === "glasses") {
+      accHtml = `
+        <rect x="35" y="44" width="13" height="10" rx="3" fill="none" stroke="#18181B" stroke-width="2.2" />
+        <rect x="52" y="44" width="13" height="10" rx="3" fill="none" stroke="#18181B" stroke-width="2.2" />
+        <line x1="48" y1="49" x2="52" y2="49" stroke="#18181B" stroke-width="2.2" />
+      `;
+    } else if (c.acc === "shades") {
+      accHtml = `
+        <rect x="34" y="44" width="14" height="10" rx="3" fill="#09090B" />
+        <rect x="52" y="44" width="14" height="10" rx="3" fill="#09090B" />
+        <line x1="48" y1="48" x2="52" y2="48" stroke="#09090B" stroke-width="2.5" />
+      `;
+    } else if (c.acc === "headphones") {
+      accHtml = `
+        <path d="M27 47 C27 24, 73 24, 73 47" fill="none" stroke="#E2E8F0" stroke-width="4" stroke-linecap="round" />
+        <rect x="23" y="43" width="6" height="14" rx="3" fill="#0F172A" />
+        <rect x="71" y="43" width="6" height="14" rx="3" fill="#0F172A" />
+      `;
+    } else if (c.acc === "beanie") {
+      accHtml = `
+        <path d="M29 37 C29 21, 71 21, 71 37 Z" fill="#1E293B" />
+        <rect x="27" y="34" width="46" height="6" rx="3" fill="#334155" />
+      `;
+    }
+
+    return `
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <rect width="100" height="100" fill="${c.bg}" />
+        ${backHair}
+        <path d="M22 96 C22 76, 78 76, 78 96 Z" fill="${c.shirt}" />
+        <rect x="44" y="65" width="12" height="14" rx="5" fill="${c.skin}" />
+        <rect x="31" y="29" width="38" height="41" rx="19" fill="${c.skin}" />
+        <circle cx="38" cy="54" r="3" fill="#F43F5E" opacity="0.28" />
+        <circle cx="62" cy="54" r="3" fill="#F43F5E" opacity="0.28" />
+        ${eyesAndMouth}
+        ${frontHair}
+        ${accHtml}
+      </svg>
+    `;
+  }
+
+  function hasRealLastSeen(lastSeenIso) {
+    if (!lastSeenIso) return false;
+    const ms = new Date(lastSeenIso).getTime();
+    return !Number.isNaN(ms) && ms > 0;
+  }
+
+  function isUserOnline(lastSeenIso) {
+    if (!hasRealLastSeen(lastSeenIso)) return false;
+    const ms = new Date(lastSeenIso).getTime();
+    return (Date.now() - ms) <= ACTIVE_WINDOW_MS;
+  }
+
+  function formatLastSeen(lastSeenIso) {
+    if (!hasRealLastSeen(lastSeenIso)) return "";
+    const ms = new Date(lastSeenIso).getTime();
+
+    const diffSec = Math.max(0, Math.floor((Date.now() - ms) / 1000));
+    if (diffSec < 180) return "Épp aktív";
+
+    const diffMin = Math.floor(diffSec / 60);
+    if (diffMin < 60) return `Utoljára aktív: ${diffMin} perce`;
+
+    const diffHours = Math.floor(diffMin / 60);
+    const d = new Date(ms);
+    const hm = d.getHours().toString().padStart(2, "0") + ":" + d.getMinutes().toString().padStart(2, "0");
+
+    const now = new Date();
+    const isToday = d.getFullYear() === now.getFullYear() &&
+      d.getMonth() === now.getMonth() &&
+      d.getDate() === now.getDate();
+
+    if (isToday) return `Utoljára aktív: ma ${hm}`;
+    if (diffHours < 48) return `Utoljára aktív: tegnap ${hm}`;
+
+    const md = (d.getMonth() + 1).toString().padStart(2, "0") + "." + d.getDate().toString().padStart(2, "0") + ".";
+    return `Utoljára aktív: ${md} ${hm}`;
+  }
+
+  function renderStatusLineHtml(lastSeenIso, suffixText = "") {
+    const label = formatLastSeen(lastSeenIso);
+    const online = isUserOnline(lastSeenIso);
+    const combined = [label, suffixText].filter(Boolean).join(" • ");
+    if (!combined) return "";
+    return `<div class="status-line ${online ? "online" : ""}">${escapeHtml(combined)}</div>`;
+  }
+
+  function renderAvatarHtml({ username = "?", avatarCfg = null, lastSeen = null, showOnlineDot = true, sizeClass = "" }) {
+    const resolvedCfg = parseAvatarConfig(avatarCfg, username);
+    const dotHtml = (showOnlineDot && isUserOnline(lastSeen))
+      ? `<span class="online-dot" title="Épp aktív"></span>`
+      : "";
+
+    return `
+      <div class="avatar-wrap ${sizeClass}">
+        <div class="friend-avatar">${buildAvatarSvg(resolvedCfg)}</div>
+        ${dotHtml}
+      </div>
+    `;
+  }
+
+  function openAvatarModal() {
+    draftAvatarCfg = { ...parseAvatarConfig(userProfile.avatar_cfg, userProfile.username) };
+    renderAvatarModalContent();
+    document.getElementById("avatarModal").classList.add("open");
+  }
+
+  function updateDraftAvatar(key, value) {
+    draftAvatarCfg[key] = value;
+    renderAvatarModalContent();
+  }
+
+  function randomizeDraftAvatar() {
+    const pick = arr => arr[Math.floor(Math.random() * arr.length)];
+    draftAvatarCfg = {
+      bg: pick(AVATAR_BG_COLORS),
+      skin: pick(AVATAR_SKIN_COLORS),
+      hairStyle: pick(AVATAR_HAIR_STYLES).id,
+      hairColor: pick(AVATAR_HAIR_COLORS),
+      expr: pick(AVATAR_EXPRESSIONS).id,
+      acc: pick(AVATAR_ACCESSORIES).id,
+      shirt: pick(AVATAR_SHIRT_COLORS)
+    };
+    renderAvatarModalContent();
+  }
+
+  function renderAvatarModalContent() {
+    const previewHtml = renderAvatarHtml({
+      username: userProfile.username || "?",
+      avatarCfg: draftAvatarCfg,
+      showOnlineDot: false,
+      sizeClass: "xl"
+    });
+
+    const swatchRow = (colors, key) => colors.map(col => `
+      <button type="button" class="avatar-swatch-btn ${draftAvatarCfg[key] === col ? "active" : ""}" style="background:${col};" onclick="updateDraftAvatar('${key}', '${col}')"></button>
+    `).join("");
+
+    const pillRow = (items, key) => items.map(it => `
+      <button type="button" class="avatar-pill-btn ${draftAvatarCfg[key] === it.id ? "active" : ""}" onclick="updateDraftAvatar('${key}', '${it.id}')">${it.label}</button>
+    `).join("");
+
+    document.getElementById("avatarModalContent").innerHTML = `
+      <div class="modal-header">
+        <div>
+          <h3 style="font-family: var(--font-serif); font-size: 22px;">Avatar szerkesztő</h3>
+          <div style="font-size: 12px; color: var(--text-muted);">Állítsd össze a saját karakteredet</div>
+        </div>
+        <button class="modal-close" onclick="closeModal('avatarModal')">✕</button>
+      </div>
+
+      <div style="text-align:center; margin-bottom:16px;">
+        ${previewHtml}
+        <button type="button" class="mini-btn" style="margin-top:10px;" onclick="randomizeDraftAvatar()">🎲 Véletlen karakter</button>
+      </div>
+
+      <div class="avatar-studio-section">
+        <label class="form-label">Háttérszín</label>
+        <div class="avatar-swatches">${swatchRow(AVATAR_BG_COLORS, "bg")}</div>
+      </div>
+
+      <div class="avatar-studio-section">
+        <label class="form-label">Bőrszín</label>
+        <div class="avatar-swatches">${swatchRow(AVATAR_SKIN_COLORS, "skin")}</div>
+      </div>
+
+      <div class="avatar-studio-section">
+        <label class="form-label">Frizura</label>
+        <div class="avatar-option-pills">${pillRow(AVATAR_HAIR_STYLES, "hairStyle")}</div>
+      </div>
+
+      <div class="avatar-studio-section">
+        <label class="form-label">Hajszín</label>
+        <div class="avatar-swatches">${swatchRow(AVATAR_HAIR_COLORS, "hairColor")}</div>
+      </div>
+
+      <div class="avatar-studio-section">
+        <label class="form-label">Arckifejezés</label>
+        <div class="avatar-option-pills">${pillRow(AVATAR_EXPRESSIONS, "expr")}</div>
+      </div>
+
+      <div class="avatar-studio-section">
+        <label class="form-label">Kiegészítő</label>
+        <div class="avatar-option-pills">${pillRow(AVATAR_ACCESSORIES, "acc")}</div>
+      </div>
+
+      <div class="avatar-studio-section">
+        <label class="form-label">Felső színe</label>
+        <div class="avatar-swatches">${swatchRow(AVATAR_SHIRT_COLORS, "shirt")}</div>
+      </div>
+
+      <button type="button" class="btn-primary" onclick="saveAvatarConfig()">Avatar mentése</button>
+    `;
+  }
+
+  async function saveAvatarConfig() {
+    userProfile.avatar_cfg = { ...draftAvatarCfg };
+    renderProfile();
+    closeModal("avatarModal");
+
+    if (sbClient && currentUser) {
+      const { error } = await sbClient
+        .from("profiles")
+        .update({ avatar_url: serializeAvatarConfig(userProfile.avatar_cfg) })
+        .eq("id", currentUser.id);
+      if (error) {
+        showToast("Hiba az avatar mentésekor: " + error.message);
+        return;
+      }
+    }
+    showToast("Avatar elmentve!");
+  }
+
+  async function touchLastSeen(force = false) {
+    if (!sbClient || !currentUser) return;
+    if (document.visibilityState === "hidden" && !force) return;
+    const nowMs = Date.now();
+    if (!force && (nowMs - lastPresencePushAt) < 45000) return;
+
+    lastPresencePushAt = nowMs;
+    const isoNow = new Date(nowMs).toISOString();
+    userProfile.last_seen = isoNow;
+
+    await sbClient
+      .from("profiles")
+      .update({ last_seen: isoNow })
+      .eq("id", currentUser.id);
+  }
+
+  function startPresenceLoop() {
+    if (presenceInterval) clearInterval(presenceInterval);
+    touchLastSeen(true);
+    presenceInterval = setInterval(() => {
+      touchLastSeen(false);
+    }, 60000);
+  }
+
   function applyBranding() {
     const u = (userProfile.username || "").trim();
-    document.title = getLibraryTitle();
+    const homeAppTitle = getHomeScreenAppTitle();
+    document.title = homeAppTitle;
+    syncDynamicAppManifest(homeAppTitle);
+
     document.getElementById("headerBrandText").textContent = u ? `@${u} // KÖNYVTÁRA` : "KÖNYVTÁRA";
     document.getElementById("headerHandle").textContent = u ? `@${u}` : "@felhasznalo";
     const profEmailEl = document.getElementById("profEmail");
@@ -1781,13 +2322,16 @@
       }
 
       if (data.user && data.session) {
+        const initialAvatar = getDefaultAvatarForUsername(rawUser);
         await sbClient.from("profiles").upsert({
           id: data.user.id,
           email: email,
           username: rawUser,
           goal: 24,
           theme: "crimson",
-          custom_vibes: [...DEFAULT_VIBES]
+          custom_vibes: [...DEFAULT_VIBES],
+          avatar_url: serializeAvatarConfig(initialAvatar),
+          last_seen: new Date().toISOString()
         });
         showToast("Sikeres regisztráció! Üdv, @" + rawUser + "!");
         await initAuthenticatedSession(data.user, rawUser);
@@ -1826,6 +2370,7 @@
         ? cleanPreferred
         : ((user.email.split("@")[0]).toLowerCase().replace(/[^a-z0-9_]/g, "").slice(0, 20) || ("olvaso_" + Math.floor(Math.random() * 9000 + 1000)));
 
+      const initialAvatar = parseAvatarConfig(prof?.avatar_url, resolvedUsername);
       const { data: upserted } = await sbClient
         .from("profiles")
         .upsert({
@@ -1834,7 +2379,9 @@
           username: resolvedUsername,
           goal: prof?.goal || 24,
           theme: prof?.theme || "crimson",
-          custom_vibes: Array.isArray(prof?.custom_vibes) ? prof.custom_vibes : [...DEFAULT_VIBES]
+          custom_vibes: Array.isArray(prof?.custom_vibes) ? prof.custom_vibes : [...DEFAULT_VIBES],
+          avatar_url: serializeAvatarConfig(initialAvatar),
+          last_seen: new Date().toISOString()
         })
         .select()
         .single();
@@ -1843,19 +2390,23 @@
 
     const loadedTheme = prof?.theme || "crimson";
     const parsedTheme = parseThemeConfig(loadedTheme);
+    const resolvedUname = prof?.username || cleanPreferred || "olvaso";
 
     userProfile = {
-      username: prof?.username || cleanPreferred || "olvaso",
+      username: resolvedUname,
       email: prof?.email || user.email || "",
       goal: prof?.goal || 24,
       theme: loadedTheme,
       rgb: parsedTheme.rgb,
-      custom_vibes: Array.isArray(prof?.custom_vibes) ? prof.custom_vibes : [...DEFAULT_VIBES]
+      custom_vibes: Array.isArray(prof?.custom_vibes) ? prof.custom_vibes : [...DEFAULT_VIBES],
+      avatar_cfg: parseAvatarConfig(prof?.avatar_url, resolvedUname),
+      last_seen: prof?.last_seen || new Date().toISOString()
     };
 
     applyBranding();
     applyTheme(userProfile.theme, userProfile.rgb);
     renderProfile();
+    startPresenceLoop();
 
     await loadBooksFromSupabase();
     await loadSocialFromSupabase();
@@ -1863,8 +2414,10 @@
   }
 
   async function logoutUser() {
+    if (presenceInterval) clearInterval(presenceInterval);
     if (sbClient) await sbClient.auth.signOut();
     currentUser = null;
+    userProfile.username = "";
     booksList = [];
     friendsList = [];
     incomingRequests = [];
@@ -1872,6 +2425,7 @@
     receivedRecs = [];
     sentRecs = [];
     pendingChatImage = "";
+    applyBranding();
     document.getElementById("authScreen").style.display = "flex";
     showToast("Kijelentkeztél.");
   }
@@ -1947,10 +2501,10 @@
             <div class="social-card" style="margin-bottom:8px;">
               <div class="friend-row">
                 <div style="display:flex; align-items:center; gap:10px;">
-                  <div class="friend-avatar">${(person.username[0] || "?").toUpperCase()}</div>
+                  ${renderAvatarHtml({ username: person.username, avatarCfg: person.avatar_cfg, lastSeen: person.last_seen })}
                   <div>
                     <div style="font-weight:600; font-size:14px;">@${escapeHtml(person.username)}</div>
-                    <div style="font-size:11px; color:var(--text-muted);">Kölcsönös barát</div>
+                    ${renderStatusLineHtml(person.last_seen)}
                   </div>
                 </div>
                 <div style="display:flex; gap:6px;">
@@ -1966,10 +2520,10 @@
         <div class="social-card" style="margin-bottom:8px;">
           <div class="friend-row">
             <div style="display:flex; align-items:center; gap:10px;">
-              <div class="friend-avatar">${(req.username[0] || "?").toUpperCase()}</div>
+              ${renderAvatarHtml({ username: req.username, avatarCfg: req.avatar_cfg, lastSeen: req.last_seen })}
               <div>
                 <div style="font-weight:600; font-size:14px;">@${escapeHtml(req.username)}</div>
-                <div style="font-size:11px; color:var(--accent);">Bejövő jelölés • Rád vár</div>
+                ${renderStatusLineHtml(req.last_seen)}
               </div>
             </div>
             <div style="display:flex; gap:6px;">
@@ -1984,10 +2538,10 @@
         <div class="social-card" style="margin-bottom:8px;">
           <div class="friend-row">
             <div style="display:flex; align-items:center; gap:10px;">
-              <div class="friend-avatar">${(req.username[0] || "?").toUpperCase()}</div>
+              ${renderAvatarHtml({ username: req.username, avatarCfg: req.avatar_cfg, lastSeen: req.last_seen })}
               <div>
                 <div style="font-weight:600; font-size:14px;">@${escapeHtml(req.username)}</div>
-                <div style="font-size:11px; color:var(--text-muted);">Elküldve • Visszajelölésre vár</div>
+                ${renderStatusLineHtml(req.last_seen, "Visszajelölésre vár")}
               </div>
             </div>
             <button type="button" class="mini-btn danger" onclick="cancelOutgoingFromModal('${req.friendshipId}', '${escapeHtml(req.username)}')">Visszavonás</button>
@@ -2137,29 +2691,51 @@
 
     let profilesMap = {};
     if (allUserIds.length > 0) {
-      const { data: pRows } = await sbClient
+      let { data: pRows, error: pErr } = await sbClient
         .from("profiles")
-        .select("id, username")
+        .select("id, username, avatar_url, last_seen")
         .in("id", allUserIds);
-      (pRows || []).forEach(p => { profilesMap[p.id] = p.username; });
+
+      if (pErr) {
+        const fallback = await sbClient
+          .from("profiles")
+          .select("id, username")
+          .in("id", allUserIds);
+        pRows = fallback.data || [];
+      }
+
+      (pRows || []).forEach(p => {
+        const uname = p.username || "felhasznalo";
+        profilesMap[p.id] = {
+          username: uname,
+          avatar_cfg: parseAvatarConfig(p.avatar_url, uname),
+          last_seen: p.last_seen || null
+        };
+      });
     }
 
     friendsList = friendEntries.map(e => ({
       id: e.id,
       friendshipId: e.friendshipId,
-      username: profilesMap[e.id] || "felhasznalo"
+      username: profilesMap[e.id]?.username || "felhasznalo",
+      avatar_cfg: profilesMap[e.id]?.avatar_cfg || getDefaultAvatarForUsername("felhasznalo"),
+      last_seen: profilesMap[e.id]?.last_seen || null
     }));
 
     incomingRequests = pendingInItems.map(p => ({
       friendshipId: p.friendshipId,
       id: p.userId,
-      username: profilesMap[p.userId] || "felhasznalo"
+      username: profilesMap[p.userId]?.username || "felhasznalo",
+      avatar_cfg: profilesMap[p.userId]?.avatar_cfg || getDefaultAvatarForUsername("felhasznalo"),
+      last_seen: profilesMap[p.userId]?.last_seen || null
     }));
 
     outgoingRequests = pendingOutItems.map(p => ({
       friendshipId: p.friendshipId,
       id: p.userId,
-      username: profilesMap[p.userId] || "felhasznalo"
+      username: profilesMap[p.userId]?.username || "felhasznalo",
+      avatar_cfg: profilesMap[p.userId]?.avatar_cfg || getDefaultAvatarForUsername("felhasznalo"),
+      last_seen: profilesMap[p.userId]?.last_seen || null
     }));
 
     const { data: recRows } = await sbClient
@@ -2169,7 +2745,8 @@
       .order("created_at", { ascending: false });
 
     const involvedIds = [...new Set((recRows || []).flatMap(r => [r.from_user, r.to_user]))];
-    let recUsersMap = { ...profilesMap };
+    let recUsersMap = {};
+    Object.keys(profilesMap).forEach(k => { recUsersMap[k] = profilesMap[k].username; });
     const missingIds = involvedIds.filter(id => id && !recUsersMap[id]);
     if (missingIds.length > 0) {
       const { data: sRows } = await sbClient
@@ -2197,6 +2774,7 @@
     document.getElementById("view-" + viewName).classList.add("active");
     document.querySelectorAll(".nav-item").forEach(el => el.classList.remove("active"));
     if (btn) btn.classList.add("active");
+    touchLastSeen(false);
 
     if (viewName === "shelf") renderShelf();
     if (viewName === "stats") renderStats();
@@ -2452,10 +3030,10 @@
         <div class="social-card">
           <div class="friend-row">
             <div style="display:flex; align-items:center; gap:10px;">
-              <div class="friend-avatar">${req.username[0].toUpperCase()}</div>
+              ${renderAvatarHtml({ username: req.username, avatarCfg: req.avatar_cfg, lastSeen: req.last_seen })}
               <div>
-                <div style="font-weight:600; font-size:14px;">@${req.username}</div>
-                <div style="font-size:11px; color:var(--text-muted);">Barátnak jelölt téged</div>
+                <div style="font-weight:600; font-size:14px;">@${escapeHtml(req.username)}</div>
+                ${renderStatusLineHtml(req.last_seen)}
               </div>
             </div>
             <div style="display:flex; gap:6px;">
@@ -2477,10 +3055,10 @@
         <div class="social-card">
           <div class="friend-row">
             <div style="display:flex; align-items:center; gap:10px;">
-              <div class="friend-avatar">${f.username[0].toUpperCase()}</div>
+              ${renderAvatarHtml({ username: f.username, avatarCfg: f.avatar_cfg, lastSeen: f.last_seen })}
               <div>
-                <div style="font-weight:600; font-size:14px;">@${f.username}</div>
-                <div style="font-size:11px; color:var(--text-muted);">Barát</div>
+                <div style="font-weight:600; font-size:14px;">@${escapeHtml(f.username)}</div>
+                ${renderStatusLineHtml(f.last_seen)}
               </div>
             </div>
             <div style="display:flex; gap:6px; flex-wrap:wrap;">
@@ -2896,6 +3474,18 @@
     document.getElementById("profEmail").textContent = userProfile.email || currentUser?.email || "-";
     document.getElementById("profUsernameReadonly").textContent = userProfile.username ? `@${userProfile.username}` : "-";
     document.getElementById("profGoal").value = userProfile.goal || 24;
+
+    const avatarBox = document.getElementById("profileAvatarPreview");
+    if (avatarBox) {
+      avatarBox.innerHTML = renderAvatarHtml({
+        username: userProfile.username || "?",
+        avatarCfg: userProfile.avatar_cfg,
+        lastSeen: userProfile.last_seen,
+        showOnlineDot: true,
+        sizeClass: "large"
+      });
+    }
+
     updateFriendCounters();
     applyTheme(userProfile.theme || "crimson", userProfile.rgb);
   }
@@ -2907,7 +3497,12 @@
     if (sbClient && currentUser) {
       const { error } = await sbClient
         .from("profiles")
-        .update({ goal: newGoal, theme: themeToSave })
+        .update({
+          goal: newGoal,
+          theme: themeToSave,
+          avatar_url: serializeAvatarConfig(userProfile.avatar_cfg),
+          last_seen: new Date().toISOString()
+        })
         .eq("id", currentUser.id);
 
       if (error) {
@@ -3520,6 +4115,16 @@
     }
     showToast("Könyv törölve.");
   }
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") {
+      touchLastSeen(true);
+    }
+  });
+
+  window.addEventListener("pointerdown", () => {
+    touchLastSeen(false);
+  }, { passive: true });
 
   (async function boot() {
     if (!sbClient) {
