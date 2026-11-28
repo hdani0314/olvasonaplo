@@ -1557,33 +1557,27 @@
       <div class="theme-selector">
         <div class="theme-option active" id="themeCrimson" onclick="setTheme('crimson')">
           <div class="theme-swatch" style="background: #B81D38;"></div>
-          <div style="font-weight: 600; font-size: 12px; margin-bottom: 2px;">Bordó</div>
-          <div style="font-size: 10px; color: var(--text-muted);">Alap téma</div>
+          <div style="font-weight: 600; font-size: 12px;">Klasszikus thriller</div>
         </div>
         <div class="theme-option" id="themeNordic" onclick="setTheme('nordic')">
           <div class="theme-swatch" style="background: #38BDF8;"></div>
-          <div style="font-weight: 600; font-size: 12px; margin-bottom: 2px;">Jégkék</div>
-          <div style="font-size: 10px; color: var(--text-muted);">Északi</div>
+          <div style="font-weight: 600; font-size: 12px;">Északi krimi</div>
         </div>
         <div class="theme-option" id="themeEmerald" onclick="setTheme('emerald')">
           <div class="theme-swatch" style="background: #10B981;"></div>
-          <div style="font-weight: 600; font-size: 12px; margin-bottom: 2px;">Smaragd</div>
-          <div style="font-size: 10px; color: var(--text-muted);">Erdei zöld</div>
+          <div style="font-weight: 600; font-size: 12px;">Kalandregény</div>
         </div>
         <div class="theme-option" id="themeAmber" onclick="setTheme('amber')">
           <div class="theme-swatch" style="background: #EAB308;"></div>
-          <div style="font-weight: 600; font-size: 12px; margin-bottom: 2px;">Borostyán</div>
-          <div style="font-size: 10px; color: var(--text-muted);">Meleg sárga</div>
+          <div style="font-weight: 600; font-size: 12px;">Történelmi regény</div>
         </div>
         <div class="theme-option" id="themeViolet" onclick="setTheme('violet')">
           <div class="theme-swatch" style="background: #A855F7;"></div>
-          <div style="font-weight: 600; font-size: 12px; margin-bottom: 2px;">Ibolya</div>
-          <div style="font-size: 10px; color: var(--text-muted);">Esti lila</div>
+          <div style="font-weight: 600; font-size: 12px;">Misztikus</div>
         </div>
         <div class="theme-option" id="themeCustom" onclick="selectCustomRgbMode()">
           <div class="theme-swatch" id="customRgbSwatch" style="background: rgb(184, 29, 56);"></div>
-          <div style="font-weight: 600; font-size: 12px; margin-bottom: 2px;">Egyedi RGB</div>
-          <div style="font-size: 10px; color: var(--text-muted);" id="customRgbHexLabel">#B81D38</div>
+          <div style="font-weight: 600; font-size: 12px;">Egyedi RGB</div>
         </div>
       </div>
 
@@ -2347,13 +2341,11 @@
     const gVal = document.getElementById("rgbGVal");
     const bVal = document.getElementById("rgbBVal");
     const swatch = document.getElementById("customRgbSwatch");
-    const hexLabel = document.getElementById("customRgbHexLabel");
     const pill = document.getElementById("rgbLivePreviewPill");
     if (rVal) rVal.textContent = r;
     if (gVal) gVal.textContent = g;
     if (bVal) bVal.textContent = b;
     if (swatch) swatch.style.background = `rgb(${r}, ${g}, ${b})`;
-    if (hexLabel) hexLabel.textContent = hex;
     if (pill) {
       pill.textContent = `rgb(${r}, ${g}, ${b}) • ${hex}`;
       pill.style.background = `rgb(${r}, ${g}, ${b})`;
